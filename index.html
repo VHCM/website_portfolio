@@ -1,0 +1,934 @@
+<!doctype html>
+<html class="dark" lang="pt-BR">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Victor Hugo | Portfolio</title>
+
+        <!-- Tailwind CDN -->
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <!-- Tailwind config unificado -->
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: "#135bec",
+                            "background-light": "#f6f6f8",
+                            "background-dark": "#111318",
+                            success: "#34A853",
+                            error: "#EA4335",
+                        },
+                        fontFamily: {
+                            display: ["Inter", "sans-serif"],
+                        },
+                        borderRadius: {
+                            DEFAULT: "0.25rem",
+                            lg: "0.5rem",
+                            xl: "0.75rem",
+                            full: "9999px",
+                        },
+                    },
+                },
+            };
+        </script>
+
+        <!-- Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Spline viewer (3D background) -->
+        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.5/build/spline-viewer.js"></script>
+
+        <!-- Seu CSS próprio -->
+        <link rel="stylesheet" href="css/custom.css" />
+    </head>
+    <body class="font-display bg-background-light dark:bg-background-dark">
+        <!-- Fundo 3D do Hero (Stitch Home) -->
+        <div class="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden" style="background: #2E3A4A;">
+            <div class="absolute inset-0 z-0">
+                <!-- Spline viewer como fundo 3D. URL fornecida pelo usuário. -->
+                <!-- <div class="spline-viewer-wrapper absolute inset-0">
+                    <spline-viewer class="spline-viewer" url="" loading="lazy">
+                        
+                    </spline-viewer>
+                </div> -->
+                <div class="absolute inset-0 bg-background-light/60 dark:bg-background-dark/50 backdrop-blur-sm bg-overlay"></div>
+            </div>
+
+            <div class="relative z-10 flex h-full grow flex-col">
+                <!-- NAVBAR GLOBAL -->
+                <header
+                    class="flex items-center justify-between whitespace-nowrap px-4 sm:px-8 md:px-10 lg:px-20 py-5 md:py-6"
+                >
+                    <div class="flex items-center gap-3 text-gray-800 dark:text-white">
+                        <div class="h-7 w-7 text-primary">
+                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                                    fill="currentColor"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg font-bold tracking-tight">Victor Hugo · Dev / Suporte N3</h2>
+                    </div>
+
+                    <!-- Menu desktop -->
+                    <div class="hidden items-center gap-8 md:flex">
+                        <nav class="flex items-center gap-6 text-sm font-medium">
+                            <a
+                                href="#home"
+                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
+                                >Home</a
+                            >
+                            <a
+                                href="#about"
+                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
+                                >Sobre</a
+                            >
+                            <a
+                                href="#skills"
+                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
+                                >Habilidades</a
+                            >
+                            <a
+                                href="#experience"
+                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
+                                >Experiência</a
+                            >
+                            <a
+                                href="#projects"
+                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
+                                >Projetos</a
+                            >
+                            <a
+                                href="#contact"
+                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
+                                >Contato</a
+                            >
+                        </nav>
+                        <button
+                            data-scroll-to="#contact"
+                            class="flex h-10 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white transition-colors hover:bg-primary/90"
+                        >
+                            <span class="truncate">Entre Em Contato</span>
+                        </button>
+                    </div>
+
+                    <!-- Menu mobile -->
+                    <button
+                        class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-transparent text-gray-800 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800 md:hidden"
+                        id="mobile-menu-btn"
+                    >
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                </header>
+
+                <!-- MENU MOBILE DROPDOWN -->
+                <nav
+                    id="mobile-menu"
+                    class="md:hidden mx-4 rounded-xl bg-white/90 dark:bg-background-dark/95 text-sm text-gray-700 dark:text-gray-200 shadow-lg border border-gray-200/70 dark:border-gray-700/70"
+                    aria-hidden="true"
+                >
+                    <ul class="flex flex-col divide-y divide-gray-200/70 dark:divide-gray-700/70">
+                        <li><a href="#home" class="block px-4 py-3" data-mobile-link>Home</a></li>
+                        <li><a href="#about" class="block px-4 py-3" data-mobile-link>Sobre</a></li>
+                        <li><a href="#skills" class="block px-4 py-3" data-mobile-link>Habilidades</a></li>
+                        <li><a href="#experience" class="block px-4 py-3" data-mobile-link>Experiência</a></li>
+                        <li><a href="#projects" class="block px-4 py-3" data-mobile-link>Projetos</a></li>
+                        <li><a href="#contact" class="block px-4 py-3" data-mobile-link>Contato</a></li>
+                    </ul>
+                </nav>
+
+                <!-- CONTEÚDO -->
+                <main class="flex flex-col gap-20 pb-12">
+                    <!-- HOME / HERO -->
+                    <section
+                        id="home"
+                        class="flex flex-1 flex-col items-center justify-center text-center px-4 pt-10 pb-16"
+                    >
+                        <div class="flex flex-col items-center gap-6 py-10">
+                            <div class="flex flex-col gap-3">
+                                <h1
+                                    class="text-5xl font-black tracking-tighter text-gray-900 dark:text-white sm:text-6xl md:text-7xl lg:text-8xl"
+                                >
+                                    Victor Hugo
+                                </h1>
+                                <h2 class="text-lg font-medium text-gray-600 dark:text-gray-300 sm:text-xl md:text-2xl">
+                                    Dev / IT · Suporte Técnico · Automação de Processos
+                                </h2>
+                            </div>
+                            <button
+                                class="flex h-12 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-6 text-base font-bold text-white transition-transform hover:scale-105"
+                                data-scroll-to="#projects"
+                            >
+                                <span class="truncate">Visualizar Meu Trabalho</span>
+                            </button>
+                        </div>
+
+                        <footer class="flex items-center justify-center pb-4 pt-2">
+                            <a
+                                class="flex flex-col items-center gap-1 text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary"
+                                href="#about"
+                            >
+                                <span class="material-symbols-outlined animate-bounce">expand_more</span>
+                            </a>
+                        </footer>
+                    </section>
+
+                    <!-- ABOUT -->
+                    <section id="about" class="relative flex w-full justify-center px-4 sm:px-6 lg:px-8">
+                        <div
+                            class="flex flex-col max-w-5xl flex-1 gap-10 bg-white/60 dark:bg-background-dark/70 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg"
+                        >
+                            <div class="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
+                                <div class="flex-shrink-0 mx-auto md:mx-0">
+                                    <div
+                                        class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-36 w-36 md:h-48 md:w-48 shadow-lg"
+                                        data-alt="Professional headshot of the website owner"
+                                        style="
+                                            background-image: url(&quot;assets/img/avatar.jpg&quot;);
+                                        "
+                                    ></div>
+                                </div>
+                                <div class="flex flex-col justify-center gap-4 text-center md:text-left">
+                                    <h1
+                                        class="text-slate-900 dark:text-white text-3xl md:text-4xl font-bold leading-tight tracking-tight"
+                                    >
+                                        Sobre mim
+                                    </h1>
+                                        <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
+                                        Profissional de TI com foco em <strong>suporte técnico</strong> e
+                                        <strong>automação de processos empresariais</strong>. Tenho experiência no
+                                        ecossistema <strong>TOTVS Fluig</strong> e <strong>Google Workspace</strong>,
+                                        atuando em manutenção de hardware e software, gerenciamento de contas e redes,
+                                        além de desenvolvimento em <strong>JavaScript, HTML e CSS</strong>.
+                                        </p>
+                                        <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
+                                        Já participei de projetos que reduziram o volume de chamados e criaram fluxos
+                                        automatizados para processos internos. Gosto de unir suporte ao usuário,
+                                        melhoria contínua e documentação bem feita.
+                                        </p>
+                                        <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
+                                        Sou graduando em Tecnologia em Análise e Desenvolvimento de Sistemas (TADS) e
+                                        busco constantemente aprender e aplicar novas soluções que façam diferença no
+                                        dia a dia das empresas.
+                                        </p>
+                                    <div class="flex items-center justify-center md:justify-start pt-2">
+                                        <button
+                                            class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
+                                        >
+                                            <span class="truncate">Baixar CV</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-4">
+                                <h3
+                                    class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight"
+                                >
+                                    Minhas Tecnologias
+                                </h3>
+                                <div class="flex gap-3 flex-wrap">
+                                <div
+                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
+                                >
+                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">JavaScript</p>
+                                </div>
+                                <div
+                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
+                                >
+                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">HTML &amp; CSS</p>
+                                </div>
+                                <div
+                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
+                                >
+                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">TOTVS Fluig</p>
+                                </div>
+                                <div
+                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
+                                >
+                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Google Workspace</p>
+                                </div>
+                                <div
+                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
+                                >
+                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Suporte N1 · N2 · N3</p>
+                                </div>
+                                <div
+                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
+                                >
+                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Hardware &amp; Redes</p>
+                                </div>
+                                <div
+                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
+                                >
+                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Automação de Processos</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SKILLS -->
+                    <section id="skills" class="relative flex h-auto w-full flex-col px-4 sm:px-6 lg:px-8">
+                        <div class="mx-auto flex w-full max-w-7xl flex-1 justify-center">
+                            <div class="flex w-full max-w-4xl flex-col">
+                                    <h2
+                                    class="text-slate-900 dark:text-white text-3xl font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 text-center"
+                                >
+                                    Habilidades e Tecnologias
+                                </h2>
+                                <div class="flex flex-wrap items-center justify-center gap-2 p-3 sm:gap-3">
+                                        <button
+                                            class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-primary px-4"
+                                            data-skill-filter="all"
+                                        >
+                                            <p class="text-white text-sm font-medium">Todos</p>
+                                        </button>
+                                    <button
+                                        class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-slate-200 px-4 transition-colors hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
+                                        data-skill-filter="frontend"
+                                    >
+                                        <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Frontend</p>
+                                    </button>
+                                    <button
+                                        class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-slate-200 px-4 transition-colors hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
+                                        data-skill-filter="backend"
+                                    >
+                                        <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Backend</p>
+                                    </button>
+                                    <button
+                                        class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-slate-200 px-4 transition-colors hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
+                                        data-skill-filter="infra"
+                                    >
+                                        <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">
+                                            Infra &amp; Suporte
+                                        </p>
+                                    </button>
+                                </div>
+
+                                <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-4 mt-3">
+                                    <div
+                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
+                                        data-skill-category="frontend"
+                                    >
+                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
+                                            >javascript</span
+                                        >
+                                        <div class="flex flex-col gap-2">
+                                            <h3
+                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
+                                            >
+                                                JavaScript
+                                            </h3>
+                                            <p class="text-slate-500 dark:text-slate-400 text-sm">Intermediário</p>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
+                                        data-skill-category="frontend"
+                                    >
+                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
+                                            >html</span
+                                        >
+                                        <div class="flex flex-col gap-2">
+                                            <h3
+                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
+                                            >
+                                                HTML5
+                                            </h3>
+                                            <p class="text-slate-500 dark:text-slate-400 text-sm">Avançado</p>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
+                                        data-skill-category="frontend"
+                                    >
+                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
+                                            >css</span
+                                        >
+                                        <div class="flex flex-col gap-2">
+                                            <h3
+                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
+                                            >
+                                                CSS3
+                                            </h3>
+                                            <p class="text-slate-500 dark:text-slate-400 text-sm">Avançado</p>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
+                                        data-skill-category="backend"
+                                    >
+                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
+                                            >developer_mode_tv</span
+                                        >
+                                        <div class="flex flex-col gap-2">
+                                            <h3
+                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
+                                            >
+                                                API / Node-like
+                                            </h3>
+                                            <p class="text-slate-500 dark:text-slate-400 text-sm">
+                                                Básico / Intermediário
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
+                                        data-skill-category="infra"
+                                    >
+                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
+                                            >computer</span
+                                        >
+                                        <div class="flex flex-col gap-2">
+                                            <h3
+                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
+                                            >
+                                                Support &amp; Hardware
+                                            </h3>
+                                            <p class="text-slate-500 dark:text-slate-400 text-sm">N1 · N2 · N3</p>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
+                                        data-skill-category="infra"
+                                    >
+                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
+                                            >cloud</span
+                                        >
+                                        <div class="flex flex-col gap-2">
+                                            <h3
+                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
+                                            >
+                                                Google Workspace Admin
+                                            </h3>
+                                            <p class="text-slate-500 dark:text-slate-400 text-sm">
+                                                Contas, domínios, backups
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- EXPERIENCE -->
+                    <section
+                        id="experience"
+                        class="relative flex min-h-screen w-full flex-col items-center overflow-x-hidden px-4 sm:px-6 lg:px-8"
+                    >
+                        <div class="flex w-full max-w-4xl grow flex-col py-10">
+                            <header class="mb-8 text-center">
+                                <h2 class="text-4xl font-bold tracking-tighter text-zinc-900 dark:text-white sm:text-5xl">
+                                    Experiência Profissional
+                                </h2>
+                                <p class="mx-auto mt-4 max-w-2xl text-base text-zinc-600 dark:text-zinc-400">
+                                    Uma linha do tempo da minha trajetória profissional, destacando as principais funções, responsabilidades e tecnologias com as quais trabalhei.
+                                </p>
+                            </header>
+
+                        <main class="relative flex flex-col gap-10">
+                            <div class="absolute left-4 top-4 bottom-4 w-0.5 bg-zinc-200 dark:bg-zinc-900 sm:left-1/2 sm:-ml-[1px]"></div>
+                            <!-- SB Group -->
+                            <div class="relative flex items-start sm:items-center">
+                                <div
+                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
+                                    >
+                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
+                                        <span class="material-symbols-outlined text-xl">work</span>
+                                    </div>
+                                </div>
+                                <div
+                                    class="ml-auto flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)]"
+                                    >
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">nov 2023 – atual</p>
+                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">Analista de Suporte de TI</p>
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">SB Group / Thealth · Cascavel, PR</p>
+                                    </div>
+                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
+                                        <li>Suporte técnico N1, N2 e N3 para usuários internos.</li>
+                                        <li>Implantação e manutenção do sistema TOTVS Fluig, com foco em melhoria de processos.</li>
+                                        <li>Administração do Google Workspace: contas, senhas, backups, domínios e acompanhamento de redes.</li>
+                                    </ul>
+                                    <div class="mt-4 flex flex-wrap gap-2">
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Fluig</span>
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Google Workspace</span>
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Suporte</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- T-Health Sistemas -->
+                            <div class="relative flex items-start sm:items-center">
+                                <div
+                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
+                                    >
+                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
+                                        <span class="material-symbols-outlined text-xl">developer_mode</span>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)] sm:self-start"
+                                    >
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">fev 2024 – nov 2025</p>
+                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">Analista de Desenvolvimento Fluig</p>
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">T-Health Sistemas · Cascavel, PR</p>
+                                    </div>
+                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
+                                        <li>Atuação em projetos Fluig com foco em automações e processos.</li>
+                                        <li>Participação em iniciativas em parceria com a Unimed FESP.</li>
+                                        <li>Atendimento de incidentes, melhorias, documentação e evidências técnicas.</li>
+                                    </ul>
+                                    <div class="mt-4 flex flex-wrap gap-2">
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Fluig</span>
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Automação</span>
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Documentação</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- iSoft Sistemas -->
+                            <div class="relative flex items-start sm:items-center">
+                                <div
+                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
+                                    >
+                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
+                                        <span class="material-symbols-outlined text-xl">support_agent</span>
+                                    </div>
+                                </div>
+                                <div
+                                    class="ml-auto flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)]"
+                                    >
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">out 2023 – nov 2023</p>
+                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">Helpdesk</p>
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">iSoft Sistemas · Cascavel, PR</p>
+                                    </div>
+                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
+                                        <li>Atendimento a usuários em ambiente corporativo, com foco em suporte ao sistema.</li>
+                                        <li>Registro e acompanhamento de chamados, garantindo retorno dentro dos prazos.</li>
+                                    </ul>
+                                    <div class="mt-4 flex flex-wrap gap-2">
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Helpdesk</span>
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Atendimento ao usuário</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- JBI Serviços -->
+                            <div class="relative flex items-start sm:items-center">
+                                <div
+                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
+                                    >
+                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
+                                        <span class="material-symbols-outlined text-xl">computer</span>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)] sm:self-start"
+                                    >
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">jul 2023 – ago 2023</p>
+                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">
+                                            Técnico de Apoio ao Usuário de Informática (Helpdesk)
+                                        </p>
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">JBI Serviços · Cascavel, PR</p>
+                                    </div>
+                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
+                                        <li>Participação em projeto de refresh de equipamentos para a DXC.</li>
+                                        <li>Formatação, atualização de drivers, configuração padrão e backup/restauração de dados.</li>
+                                        <li>Entrega de novos equipamentos e recolhimento dos antigos com documentação organizada.</li>
+                                    </ul>
+                                    <div class="mt-4 flex flex-wrap gap-2">
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Hardware</span>
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Refresh</span>
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Documentação</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- SEASO -->
+                            <div class="relative flex items-start sm:items-center">
+                                <div
+                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
+                                    >
+                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
+                                        <span class="material-symbols-outlined text-xl">lan</span>
+                                    </div>
+                                </div>
+                                <div
+                                    class="ml-auto flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)]"
+                                    >
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">nov 2022 – mar 2023</p>
+                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">Auxiliar de Informática</p>
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                                            SEASO – Departamento de Assistência Social · Cascavel, PR
+                                        </p>
+                                    </div>
+                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
+                                        <li>Gestão de softwares, com foco em segurança, estabilidade e disponibilidade dos sistemas.</li>
+                                        <li>Suporte técnico presencial e remoto para usuários internos.</li>
+                                        <li>Montagem, instalação de computadores e configuração/manutenção de redes.</li>
+                                    </ul>
+                                    <div class="mt-4 flex flex-wrap gap-2">
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Redes</span>
+                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Suporte</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Maffini / Lojas O Doidão (experiência comercial) -->
+                            <div class="relative flex items-start sm:items-center">
+                                <div
+                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
+                                    >
+                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
+                                        <span class="material-symbols-outlined text-xl">storefront</span>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)] sm:self-start"
+                                    >
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">abr 2022 – nov 2022</p>
+                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">Vendedor Interno</p>
+                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">Maffini Material de Construção · Cascavel, PR</p>
+                                    </div>
+                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
+                                        <li>Atuação em vendas e atendimento ao cliente, com foco em metas e faturamento.</li>
+                                        <li>Experiência em vitrine, exposição de produtos e organização de loja.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </main>
+                        </div>
+                    </section>
+
+                    <!-- PROJECTS -->
+                    <section id="projects" class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden px-4 sm:px-6 lg:px-8" >
+                        <div class="flex h-full grow flex-col">
+                            <main class="py-10 sm:py-14 lg:py-18 flex flex-1 justify-center">
+                                <div class="flex flex-col w-full max-w-7xl">
+                                    <div class="flex flex-col items-center gap-4 text-center">
+                                        <h1
+                                            class="text-slate-900 dark:text-white tracking-tight text-4xl md:text-5xl font-bold leading-tight"
+                                        >
+                                            Projetos em Destaque
+                                        </h1>
+                                        <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl">
+                                            Aqui estão alguns projetos dos quais me orgulho. Use os filtros para explorar.
+                                        </p>
+                                    </div>
+
+                                    <div class="flex justify-center gap-2 sm:gap-3 p-3 flex-wrap mt-8">
+                                        <button
+                                            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full px-4 text-sm font-medium bg-primary text-white"
+                                            data-project-filter="all"
+                                        >
+                                            Todos
+                                        </button>
+                                        <button
+                                            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full px-4 text-sm font-medium bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700"
+                                            data-project-filter="fluig"
+                                        >
+                                            Fluig
+                                        </button>
+                                        <button
+                                            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full px-4 text-sm font-medium bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700"
+                                            data-project-filter="workspace"
+                                        >
+                                            Google Workspace
+                                        </button>
+                                        <button
+                                            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full px-4 text-sm font-medium bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700"
+                                            data-project-filter="infra"
+                                        >
+                                            Infra / Suporte
+                                        </button>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 p-4 mt-4">
+                                        <div
+                                            class="flex flex-col gap-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 transition-all hover:shadow-lg hover:-translate-y-1"
+                                            data-project-category="fluig"
+                                        >
+                                            <div
+                                                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                                                data-alt="Fluig forms and workflows"
+                                                style="
+                                                    background-image: url(&quot;https://images.pexels.com/photos/2706379/pexels-photo-2706379.jpeg?auto=compress&cs=tinysrgb&w=1200&quot;);
+                                                "
+                                            ></div>
+                                            <div class="flex flex-col flex-1 project-card">
+                                                <h3
+                                                    class="text-slate-900 dark:text-white text-lg font-semibold leading-normal"
+                                                >
+                                                    Workflows e Forms (Fluig)
+                                                </h3>
+                                                <p class="text-slate-600 dark:text-slate-400 text-sm mt-1 flex-1">
+                                                    Desenvolvimento e suporte em fluxos de aprovação, cadastros e
+                                                    integrações com Protheus/RM.
+                                                </p>
+                                                <div class="flex flex-wrap gap-2 mt-4">
+                                                    <span
+                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary"
+                                                        >Fluig</span
+                                                    >
+                                                    <span
+                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+                                                        >JavaScript</span
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="flex flex-col gap-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 transition-all hover:shadow-lg hover:-translate-y-1"
+                                            data-project-category="workspace"
+                                        >
+                                            <div
+                                                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                                                data-alt="Google Workspace admin dashboard"
+                                                style="
+                                                    background-image: url(&quot;https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200&quot;);
+                                                "
+                                            ></div>
+                                            <div class="flex flex-col flex-1 project-card">
+                                                <h3
+                                                    class="text-slate-900 dark:text-white text-lg font-semibold leading-normal"
+                                                >
+                                                    Administração Google Workspace
+                                                </h3>
+                                                <p class="text-slate-600 dark:text-slate-400 text-sm mt-1 flex-1">
+                                                    Organização de contas, grupos, domínios, permissões e rotinas de
+                                                    backup para ambiente corporativo.
+                                                </p>
+                                                <div class="flex flex-wrap gap-2 mt-4">
+                                                    <span
+                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary"
+                                                        >Google Workspace</span
+                                                    >
+                                                    <span
+                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+                                                        >Suporte</span
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="flex flex-col gap-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 transition-all hover:shadow-lg hover:-translate-y-1"
+                                            data-project-category="infra"
+                                        >
+                                            <div
+                                                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                                                data-alt="IT hardware refresh"
+                                                style="
+                                                    background-image: url(&quot;https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200&quot;);
+                                                "
+                                            ></div>
+                                            <div class="flex flex-col flex-1 project-card">
+                                                <h3
+                                                    class="text-slate-900 dark:text-white text-lg font-semibold leading-normal"
+                                                >
+                                                    Atualização de Hardware e Suporte
+                                                </h3>
+                                                <p class="text-slate-600 dark:text-slate-400 text-sm mt-1 flex-1">
+                                                    Projetos de troca de parque tecnológico, formatação, backup e
+                                                    entrega de novos equipamentos para usuários.
+                                                </p>
+                                                <div class="flex flex-wrap gap-2 mt-4">
+                                                    <span
+                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary"
+                                                        >Infra</span
+                                                    >
+                                                    <span
+                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+                                                        >Helpdesk</span
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </main>
+                        </div>
+                    </section>
+
+                    <!-- CONTACT -->
+                    <section
+                        id="contact"
+                        class="relative flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden p-4 sm:p-6 md:p-8"
+                    >
+                        <div
+                            class="w-full max-w-6xl rounded-xl bg-white/60 dark:bg-white/5 backdrop-blur-sm p-8 md:p-12 lg:p-16 shadow-xl"
+                        >
+                            <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+                                <div class="flex flex-col justify-center">
+                                    <h2
+                                        class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl"
+                                    >
+                                        Fale Comigo
+                                    </h2>
+                                    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+                                        Tem um projeto em mente, uma dúvida ou quer se conectar? Fique à vontade para
+                                        entrar em contato. Estou aberto a novas oportunidades e colaborações.
+                                    </p>
+
+                                    <div
+                                        class="mt-8 flex items-center gap-4 rounded-lg bg-slate-100 dark:bg-slate-800/50 p-4"
+                                    >
+                                        <div
+                                            class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary"
+                                        >
+                                            <span class="material-symbols-outlined">mail</span>
+                                        </div>
+                                        <div>
+                                            <p id="contact-email" class="font-semibold text-slate-900 dark:text-white">
+                                                victorhugocorreiamelo@gmail.com
+                                            </p>
+                                            <p class="text-sm text-slate-500 dark:text-slate-400">
+                                                Clique no botão para copiar
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <button
+                                            id="copy-email-btn"
+                                            class="flex h-12 w-full cursor-pointer items-center justify-center gap-2.5 overflow-hidden rounded-lg bg-slate-200 px-5 text-base font-bold text-slate-700 transition hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+                                        >
+                                            <span class="material-symbols-outlined text-xl">content_copy</span>
+                                            <span class="truncate copy-label">Copiar E-mail</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-800">
+                                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+                                            Me encontre nas redes sociais
+                                        </h3>
+                                        <div class="mt-4 flex gap-4">
+                                            <a
+                                                aria-label="LinkedIn"
+                                                class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-200 text-slate-600 transition hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+                                                href="https://www.linkedin.com/in/victor-hugo-correia-de-melo"
+                                                target="_blank"
+                                            >
+                                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                                    ></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="rounded-xl bg-white p-6 shadow-lg ring-1 ring-slate-200/50 dark:bg-slate-900/70 dark:ring-slate-800/50 sm:p-8"
+                                >
+                                    <form id="contact-form" class="space-y-6">
+                                        <div>
+                                            <label
+                                                    class="block text-sm font-medium leading-6 text-slate-900 dark:text-slate-200"
+                                                    for="name"
+                                                    >Nome</label
+                                                >
+                                            <div class="mt-2">
+                                                <input
+                                                    autocomplete="name"
+                                                    class="block w-full rounded-lg border-0 bg-slate-100 dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-700 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition"
+                                                    id="name"
+                                                    name="name"
+                                                    placeholder="Digite seu nome"
+                                                    type="text"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-sm font-medium leading-6 text-slate-900 dark:text-slate-200"
+                                                for="email"
+                                                >E-mail</label
+                                            >
+                                            <div class="mt-2">
+                                                <input
+                                                    autocomplete="email"
+                                                    class="block w-full rounded-lg border-0 bg-slate-100 dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-700 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition"
+                                                    id="email"
+                                                    name="email"
+                                                    placeholder="Digite seu e-mail"
+                                                    type="email"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-sm font-medium leading-6 text-slate-900 dark:text-slate-200"
+                                                for="subject"
+                                                >Assunto</label
+                                            >
+                                            <div class="mt-2">
+                                                <input
+                                                    class="block w-full rounded-lg border-0 bg-slate-100 dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-700 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition"
+                                                    id="subject"
+                                                    name="subject"
+                                                    placeholder="Sobre o que é?"
+                                                    type="text"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-sm font-medium leading-6 text-slate-900 dark:text-slate-200"
+                                                for="message"
+                                                >Mensagem</label
+                                            >
+                                            <div class="mt-2">
+                                                <textarea
+                                                    class="block w-full rounded-lg border-0 bg-slate-100 dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-700 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition"
+                                                    id="message"
+                                                    name="message"
+                                                    placeholder="Sua mensagem aqui..."
+                                                    rows="4"
+                                                ></textarea>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button
+                                                class="flex w-full justify-center rounded-xl bg-primary px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                                type="submit"
+                                            >
+                                                Enviar Mensagem
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+
+                <footer class="flex items-center justify-center pb-6 pt-2 text-xs text-slate-500 dark:text-slate-400">
+                    © <span id="year" class="mx-1"></span> Victor Hugo · VHCM Tech Solutions
+                </footer>
+            </div>
+        </div>
+
+        <!-- JS externo -->
+        <script src="js/main.js"></script>
+    </body>
+</html>

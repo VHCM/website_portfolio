@@ -1,0 +1,118 @@
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+/* Animações e utilitários personalizados */
+:root {
+  --transition-fast: 180ms;
+  --transition-medium: 300ms;
+  --transition-slow: 420ms;
+  --ease-soft: cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.bg-3d, #bg-3d { position: absolute; inset: 0; perspective: 800px; transform-style: preserve-3d; z-index: 2; }
+.bg-3d__layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform, opacity;
+  transform: translate3d(0,0,0);
+  transition: transform var(--transition-medium) var(--ease-soft), opacity var(--transition-medium) var(--ease-soft);
+  mix-blend-mode: screen;
+  opacity: 1;
+}
+.bg-3d__layer[data-depth] { transform-origin: center; }
+
+/* Subtle motion fallback for reduced motion and touch devices */
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .bg-3d__layer { transition: none !important; transform: none !important; opacity: 0.9; }
+}
+
+/* Ensure overlay sits behind the 3D layers so they remain visible */
+.bg-overlay { z-index: 1; position: relative; }
+
+/* Spline viewer styles */
+.spline-viewer-wrapper { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+/* .spline-viewer { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; } */
+
+/* Enable interaction on desktop (large screens) but keep it non-blocking on mobile */
+@media (min-width: 1024px) {
+  .spline-viewer { pointer-events: auto; }
+}
+
+/* Respeitar preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  .reduced-motion { animation: none !important; transition: none !important; }
+}
+
+/* Reveal on scroll */
+.section-reveal { opacity: 0; transform: translateY(12px) scale(.995); filter: blur(0.6px); will-change: transform, opacity; transition: opacity var(--transition-medium) var(--ease-soft), transform var(--transition-medium) var(--ease-soft), filter var(--transition-medium) var(--ease-soft); }
+.section-reveal.in-view { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+
+/* permitir stagger via --reveal-delay (JS insere) */
+.section-reveal { transition-delay: var(--reveal-delay, 0ms); }
+
+/* Buttons smoother */
+.btn-smooth { transition: transform var(--transition-fast) var(--ease-soft), box-shadow var(--transition-fast) var(--ease-soft); }
+.btn-smooth:active { transform: translateY(1px) scale(.997); }
+
+/* Mobile menu animation */
+#mobile-menu { transition: max-height var(--transition-medium) var(--ease-soft), opacity var(--transition-medium) var(--ease-soft), transform var(--transition-medium) var(--ease-soft); max-height: 0; opacity: 0; transform: translateY(-8px) scaleY(.99); overflow: hidden; transform-origin: top center; }
+#mobile-menu.open { max-height: 1000px; opacity: 1; transform: translateY(0) scaleY(1); }
+
+/* Simple toast */
+.site-toast { position: fixed; right: 1rem; bottom: 1rem; z-index: 9999; background: rgba(2,6,23,0.9); color: #fff; padding: 0.6rem 0.9rem; border-radius: 10px; font-size: 0.95rem; box-shadow: 0 10px 30px rgba(2,6,23,0.6); opacity: 0; transform: translateY(12px) scale(.995); transition: opacity var(--transition-fast) var(--ease-soft), transform var(--transition-fast) var(--ease-soft); }
+.site-toast.show { opacity: 1; transform: translateY(0) scale(1); }
+
+/* Card hover micro interaction */
+.project-card {
+  transition: transform var(--transition-medium) var(--ease-soft), box-shadow var(--transition-medium) var(--ease-soft);
+}
+.project-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 18px 40px rgba(2,6,23,0.18);
+}
+
+/* Responsividade e ajustes para telas menores */
+@media (max-width: 1024px) {
+  :root {
+    --transition-fast: 140ms;
+    --transition-medium: 240ms;
+  }
+  /* reduzir intensidade do reveal em tablets */
+  .section-reveal { transform: translateY(10px) scale(.997); }
+  .project-card { transition: transform var(--transition-medium) var(--ease-soft), box-shadow var(--transition-medium) var(--ease-soft); }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --transition-fast: 120ms;
+    --transition-medium: 180ms;
+  }
+
+  /* Toast centralizado e menos intrusivo em mobile */
+  .site-toast { left: 50%; right: auto; transform: translate(-50%, 12px) scale(.995); width: min(92%, 420px); }
+  .site-toast.show { transform: translate(-50%, 0) scale(1); }
+
+  /* Menu mobile ocupa a largura e tem padding confortável */
+  #mobile-menu { margin: 0 0.5rem; border-radius: 12px; }
+  #mobile-menu.open { max-height: 90vh; }
+
+  /* Remover hover/transform para dispositivos touch — usar interação por toque */
+  @media (hover: none) {
+    .project-card:hover { transform: none; box-shadow: none; }
+    .project-card { will-change: auto; }
+  }
+
+  /* Ajustes de reveal para mobile (menos deslocamento) */
+  .section-reveal { transform: translateY(6px) scale(.998); }
+
+  /* Botões maiores e fáceis de tocar */
+  .btn-smooth, .btn-smooth > * { touch-action: manipulation; }
+}
+
+/* Melhor compatibilidade com teclados: foco visível nos elementos */
+:focus { outline-offset: 2px; }
