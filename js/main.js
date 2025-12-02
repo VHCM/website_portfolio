@@ -1,340 +1,635 @@
-// Ano no rodapé
-const yearEl = document.getElementById("year");
-if (yearEl) {
-  yearEl.textContent = new Date().getFullYear();
+/**
+ * main.js - Funcionalidades JavaScript para o portfólio
+ * Autor: Victor Hugo Correia de Melo
+ * Versão: 2.0 - Otimizado e Semântico
+ */
+
+// ===== CONFIGURAÇÕES =====
+const CONFIG = {
+    animations: {
+        staggerDelay: 80, // ms entre cada elemento
+        maxStagger: 600, // ms máximo de delay
+        toastDuration: 3000, // ms
+        scrollOffset: 20, // pixels
+    },
+    selectors: {
+        mobileMenu: '#mobile-menu',
+        mobileMenuBtn: '#mobile-menu-btn',
+        copyEmailBtn: '#copy-email-btn',
+        contactEmail: '#contact-email',
+        contactForm: '#contact-form',
+        yearElement: '#current-year',
+        skillsFilter: '[data-skill-filter]',
+        skillCards: '[data-skill-category]',
+        projectsFilter: '[data-project-filter]',
+        projectCards: '[data-project-category]',
+        scrollTo: '[data-scroll-to]',
+        mobileLinks: '[data-mobile-link]',
+        sectionReveal: '.section-reveal'
+    },
+    classes: {
+        active: 'active',
+        open: 'open',
+        hidden: 'hidden',
+        toast: 'toast',
+        hide: 'hide'
+    }
+};
+
+// ===== UTILITÁRIOS =====
+class Utils {
+    /**
+     * Debounce function para otimizar eventos
+     */
+    static debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    /**
+     * Verifica se o usuário prefere movimento reduzido
+     */
+    static prefersReducedMotion() {
+        return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    /**
+     * Verifica se é um dispositivo touch
+     */
+    static isTouchDevice() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    }
+
+    /**
+     * Copia texto para a área de transferência
+     */
+    static async copyToClipboard(text) {
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } else {
+                // Fallback para navegadores antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                return true;
+            }
+        } catch (error) {
+            console.error('Erro ao copiar para área de transferência:', error);
+            return false;
+        }
+    }
+
+    /**
+     * Scroll suave para elemento
+     */
+    static smoothScrollTo(element, offset = 0) {
+        if (!element) return;
+
+        const prefersReduced = Utils.prefersReducedMotion();
+        const header = document.querySelector('header');
+        const headerHeight = header ? header.offsetHeight : 0;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerHeight - offset;
+
+        if (prefersReduced) {
+            window.scrollTo({ top: offsetPosition });
+        } else {
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+    }
 }
 
-// Scroll suave para elementos com data-scroll-to
-document.querySelectorAll("[data-scroll-to]").forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    const target = btn.getAttribute("data-scroll-to");
-    const el = document.querySelector(target);
-    if (el) {
-      // respeitar header fixo: calcular offset
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const header = document.querySelector('header');
-      const headerHeight = header ? header.getBoundingClientRect().height : 0;
-      const top = el.getBoundingClientRect().top + window.scrollY - headerHeight - 12; // pequeno espaçamento
-      if (prefersReduced) {
-        window.scrollTo(0, top);
-      } else {
-        window.scrollTo({ top, behavior: "smooth" });
-      }
+// ===== GERENCIADOR DE ANIMAÇÕES =====
+class AnimationManager {
+    constructor() {
+        this.observer = null;
+        this.staggerTimer = null;
+        this.init();
     }
-  });
+
+    init() {
+        if (Utils.prefersReducedMotion()) return;
+        this.setupIntersectionObserver();
+        this.setupStaggerAnimations();
+    }
+
+    setupIntersectionObserver() {
+        const options = {
+            root: null,
+            rootMargin: '0px 0px -50px 0px',
+            threshold: 0.1
+        };
+
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    this.observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        // Observar elementos com animação
+        document.querySelectorAll(CONFIG.selectors.sectionReveal).forEach(el => {
+            this.observer.observe(el);
+        });
+    }
+
+    setupStaggerAnimations() {
+        const applyStagger = () => {
+            const elements = Array.from(document.querySelectorAll(CONFIG.selectors.sectionReveal));
+            
+            // Ordenar por posição vertical
+            elements.sort((a, b) => {
+                const rectA = a.getBoundingClientRect();
+                const rectB = b.getBoundingClientRect();
+                return (rectA.top + window.pageYOffset) - (rectB.top + window.pageYOffset);
+            });
+
+            // Aplicar delays escalonados
+            elements.forEach((el, index) => {
+                const delay = Math.min(index * CONFIG.animations.staggerDelay, CONFIG.animations.maxStagger);
+                el.style.setProperty('--reveal-delay', `${delay}ms`);
+            });
+        };
+
+        // Aplicar stagger após carregamento
+        if (document.readyState === 'complete') {
+            applyStagger();
+        } else {
+            window.addEventListener('load', applyStagger);
+        }
+
+        // Reaplicar no resize (com debounce)
+        window.addEventListener('resize', Utils.debounce(applyStagger, 150));
+    }
+}
+
+// ===== GERENCIADOR DE FILTROS =====
+class FilterManager {
+    // agora aceita atributo dos botões (buttonAttr) e atributo dos itens (itemAttr)
+    constructor(filterButtons, filterItems, buttonAttr, itemAttr = null) {
+        this.filterButtons = Array.from(filterButtons);
+        this.filterItems = Array.from(filterItems);
+        this.buttonAttribute = buttonAttr;
+        // se itemAttr não informado, usa o mesmo que o botão (compatibilidade)
+        this.itemAttribute = itemAttr || buttonAttr;
+        this.activeFilter = 'all';
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.setActiveFilter('all');
+    }
+
+    setupEventListeners() {
+        this.filterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const filter = button.getAttribute(this.buttonAttribute);
+                this.setActiveFilter(filter);
+            });
+        });
+    }
+
+    setActiveFilter(filter) {
+        this.activeFilter = filter;
+        
+        // Atualizar botões
+        this.filterButtons.forEach(button => {
+            const buttonFilter = button.getAttribute(this.buttonAttribute);
+            if (buttonFilter === filter) {
+                button.classList.add(CONFIG.classes.active);
+                button.setAttribute('aria-pressed', 'true');
+            } else {
+                button.classList.remove(CONFIG.classes.active);
+                button.setAttribute('aria-pressed', 'false');
+            }
+        });
+
+        // Filtrar itens
+        this.filterItems.forEach(item => {
+            const itemFilter = item.getAttribute(this.itemAttribute);
+            
+            // Adicionar/remover classe hidden ao invés de manipular display diretamente
+            if (filter === 'all' || itemFilter === filter) {
+                item.classList.remove('hidden');
+                item.style.display = ''; // Reset para display padrão
+                item.setAttribute('aria-hidden', 'false');
+            } else {
+                item.classList.add('hidden');
+                item.style.display = 'none';
+                item.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        // Adicionar animação suave
+        this.animateFilterChange();
+    }
+
+    animateFilterChange() {
+        // Adicionar animação de fade-in para os itens que aparecem
+        this.filterItems.forEach(item => {
+            if (!item.classList.contains('hidden')) {
+                item.classList.add('filter-fade-in');
+                setTimeout(() => {
+                    item.classList.remove('filter-fade-in');
+                }, 300);
+            }
+        });
+    }
+}
+
+// ===== GERENCIADOR DE MENU MOBILE =====
+class MobileMenuManager {
+    constructor() {
+        this.menuBtn = document.querySelector(CONFIG.selectors.mobileMenuBtn);
+        this.menu = document.querySelector(CONFIG.selectors.mobileMenu);
+        this.isOpen = false;
+        this._boundKeydown = null;
+        
+        if (this.menuBtn && this.menu) {
+            this.init();
+        }
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.updateAccessibility();
+    }
+
+    setupEventListeners() {
+        // Toggle do menu
+        this.menuBtn.addEventListener('click', () => this.toggleMenu());
+        
+        // Fechar ao clicar em links
+        document.querySelectorAll(CONFIG.selectors.mobileLinks).forEach(link => {
+            link.addEventListener('click', () => this.closeMenu());
+        });
+        
+        // Fechar com Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isOpen) {
+                this.closeMenu();
+            }
+        });
+        
+        // Fechar ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (this.isOpen && !this.menu.contains(e.target) && !this.menuBtn.contains(e.target)) {
+                this.closeMenu();
+            }
+        });
+
+        // Manter foco dentro do menu quando aberto (tab trap)
+        this.menu.addEventListener('keydown', (e) => {
+            if (!this.isOpen) return;
+            if (e.key !== 'Tab') return;
+
+            const focusable = this.menu.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (!focusable || focusable.length === 0) return;
+
+            const firstElement = focusable[0];
+            const lastElement = focusable[focusable.length - 1];
+
+            if (e.shiftKey && document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+            } else if (!e.shiftKey && document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
+            }
+        });
+    }
+
+    toggleMenu() {
+        if (this.isOpen) {
+            this.closeMenu();
+        } else {
+            this.openMenu();
+        }
+    }
+
+    openMenu() {
+        this.isOpen = true;
+        this.menu.classList.add(CONFIG.classes.open);
+        this.updateAccessibility();
+        
+        // Travar rolagem do body enquanto o menu estiver aberto
+        document.body.classList.add('menu-open');
+
+        // Alternar ícone do botão para indicar fechamento
+        const icon = this.menuBtn.querySelector('.material-symbols-outlined');
+        if (icon) icon.textContent = 'close';
+    }
+
+    closeMenu() {
+        this.isOpen = false;
+        this.menu.classList.remove(CONFIG.classes.open);
+        this.updateAccessibility();
+        
+        // Remover trava de rolagem
+        document.body.classList.remove('menu-open');
+
+        // Restaurar ícone do botão
+        const icon = this.menuBtn.querySelector('.material-symbols-outlined');
+        if (icon) icon.textContent = 'menu';
+
+        // Retornar foco para o botão
+        this.menuBtn.focus();
+    }
+
+    updateAccessibility() {
+        this.menu.setAttribute('aria-hidden', String(!this.isOpen));
+        this.menuBtn.setAttribute('aria-expanded', String(this.isOpen));
+        this.menuBtn.setAttribute('aria-controls', 'mobile-menu');
+    }
+
+    trapFocus() {
+        const focusableElements = this.menu.querySelectorAll(
+            'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        
+        if (focusableElements.length > 0) {
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+            
+            firstElement.focus();
+            
+            // Lidar com tab dentro do menu
+            this.menu.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey && document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    } else if (!e.shiftKey && document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            });
+        }
+    }
+}
+
+// ===== GERENCIADOR DE CONTATO =====
+class ContactManager {
+    constructor() {
+        this.copyBtn = document.querySelector(CONFIG.selectors.copyEmailBtn);
+        this.emailElement = document.querySelector(CONFIG.selectors.contactEmail);
+        this.contactForm = document.querySelector(CONFIG.selectors.contactForm);
+        this.init();
+    }
+
+    init() {
+        if (this.copyBtn && this.emailElement) {
+            this.setupCopyEmail();
+        }
+        
+        if (this.contactForm) {
+            this.setupContactForm();
+        }
+    }
+
+    setupCopyEmail() {
+        this.copyBtn.addEventListener('click', async () => {
+            const email = this.emailElement.textContent.trim();
+            const success = await Utils.copyToClipboard(email);
+            
+            if (success) {
+                this.showCopyFeedback();
+                ToastManager.show('E-mail copiado para a área de transferência!');
+            } else {
+                ToastManager.show('Não foi possível copiar o e-mail. Tente manualmente.', 'error');
+            }
+        });
+    }
+
+    showCopyFeedback() {
+        const label = this.copyBtn.querySelector('.copy-label');
+        if (label) {
+            const originalText = label.textContent;
+            label.textContent = 'Copiado!';
+            
+            setTimeout(() => {
+                label.textContent = originalText;
+            }, 2000);
+        }
+    }
+
+    setupContactForm() {
+        this.contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Validação básica
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim() || 'Contato pelo portfólio';
+            const message = document.getElementById('message').value.trim();
+            
+            if (!name || !email || !message) {
+                ToastManager.show('Por favor, preencha todos os campos obrigatórios.', 'error');
+                return;
+            }
+            
+            // Validar email
+            if (!this.isValidEmail(email)) {
+                ToastManager.show('Por favor, insira um e-mail válido.', 'error');
+                return;
+            }
+            
+            // Enviar via mailto
+            this.sendMailto(name, email, subject, message);
+        });
+    }
+
+    isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    sendMailto(name, email, subject, message) {
+        const recipient = this.emailElement.textContent.trim();
+        const body = `Nome: ${name}\nE-mail: ${email}\n\nMensagem:\n${message}`;
+        
+        const mailtoUrl = `mailto:${encodeURIComponent(recipient)}` +
+                         `?subject=${encodeURIComponent(subject)}` +
+                         `&body=${encodeURIComponent(body)}`;
+        
+        window.open(mailtoUrl, '_blank');
+        ToastManager.show('Abrindo cliente de e-mail...');
+        this.contactForm.reset();
+    }
+}
+
+// ===== GERENCIADOR DE TOAST =====
+class ToastManager {
+    static show(message, type = 'success') {
+        // Remover toast anterior
+        const existingToast = document.querySelector(`.${CONFIG.classes.toast}`);
+        if (existingToast) {
+            existingToast.remove();
+        }
+        
+        // Criar novo toast
+        const toast = document.createElement('div');
+        toast.className = `${CONFIG.classes.toast} ${type}`;
+        toast.setAttribute('role', 'alert');
+        toast.setAttribute('aria-live', 'assertive');
+        toast.setAttribute('aria-atomic', 'true');
+        toast.textContent = message;
+        
+        document.body.appendChild(toast);
+        
+        // Remover após tempo
+        setTimeout(() => {
+            toast.classList.add(CONFIG.classes.hide);
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }, CONFIG.animations.toastDuration);
+    }
+}
+
+// ===== INICIALIZAÇÃO =====
+class PortfolioApp {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        // Elementos básicos
+        this.setCurrentYear();
+        this.setupScrollTo();
+        
+        // Gerenciadores
+        this.animationManager = new AnimationManager();
+        this.mobileMenuManager = new MobileMenuManager();
+        this.contactManager = new ContactManager();
+        
+        // Filtros
+        this.setupFilters();
+        
+        // Eventos globais
+        this.setupGlobalEvents();
+    }
+
+    setCurrentYear() {
+        const yearElement = document.querySelector(CONFIG.selectors.yearElement);
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+    }
+
+    setupScrollTo() {
+        document.querySelectorAll(CONFIG.selectors.scrollTo).forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = button.getAttribute('data-scroll-to');
+                const element = document.querySelector(target);
+                if (element) {
+                    Utils.smoothScrollTo(element, CONFIG.animations.scrollOffset);
+                }
+            });
+        });
+    }
+
+    setupFilters() {
+        // Filtro de habilidades
+        const skillFilterButtons = document.querySelectorAll(CONFIG.selectors.skillsFilter);
+        const skillCards = document.querySelectorAll(CONFIG.selectors.skillCards);
+        
+        if (skillFilterButtons.length && skillCards.length) {
+            this.skillFilterManager = new FilterManager(
+                skillFilterButtons,
+                skillCards,
+                'data-skill-filter',
+                'data-skill-category'
+            );
+        }
+        
+        // Filtro de projetos
+        const projectFilterButtons = document.querySelectorAll(CONFIG.selectors.projectsFilter);
+        const projectCards = document.querySelectorAll(CONFIG.selectors.projectCards);
+        
+        if (projectFilterButtons.length && projectCards.length) {
+            this.projectFilterManager = new FilterManager(
+                projectFilterButtons,
+                projectCards,
+                'data-project-filter',
+                'data-project-category'
+            );
+        }
+    }
+
+    setupGlobalEvents() {
+        // Header scroll effect
+        let lastScroll = 0;
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', Utils.debounce(() => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                header.classList.remove('scrolled');
+            } else if (currentScroll > lastScroll && currentScroll > 100) {
+                header.classList.add('scrolled');
+            } else if (currentScroll < lastScroll) {
+                header.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        }, 100));
+    }
+}
+
+// ===== INICIAR APLICAÇÃO =====
+document.addEventListener('DOMContentLoaded', () => {
+    // Verificar suporte a JavaScript
+    document.documentElement.classList.add('js-enabled');
+    
+    // Inicializar aplicação
+    new PortfolioApp();
+    
+    // Feedback de carregamento
+    console.log('Portfólio carregado com sucesso! 🚀');
 });
 
-// Menu mobile abrir/fechar
-const mobileBtn = document.getElementById("mobile-menu-btn");
-const mobileMenu = document.getElementById("mobile-menu");
-
-if (mobileBtn && mobileMenu) {
-  // Toggle com animação: usamos a classe `open` e o atributo aria-hidden
-  const setMenuOpen = (open) => {
-    if (open) {
-      mobileMenu.classList.add("open");
-      mobileMenu.setAttribute("aria-hidden", "false");
-      mobileBtn.setAttribute("aria-expanded", "true");
-    } else {
-      mobileMenu.classList.remove("open");
-      mobileMenu.setAttribute("aria-hidden", "true");
-      mobileBtn.setAttribute("aria-expanded", "false");
-    }
-  };
-
-  mobileBtn.addEventListener("click", () => {
-    const isOpen = mobileMenu.classList.contains("open");
-    setMenuOpen(!isOpen);
-  });
-
-  mobileMenu.querySelectorAll("[data-mobile-link]").forEach((link) => {
-    link.addEventListener("click", () => {
-      setMenuOpen(false);
-    });
-  });
-
-  // Fechar com Escape
-  document.addEventListener("keydown", (ev) => {
-    if (ev.key === "Escape" && mobileMenu.classList.contains("open")) {
-      setMenuOpen(false);
-    }
-  });
+// ===== POLYFILLS & FALLBACKS =====
+// Suporte para intersection observer
+if (!('IntersectionObserver' in window)) {
+    console.warn('IntersectionObserver não suportado. Carregando polyfill...');
+    const script = document.createElement('script');
+    script.src = 'https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver';
+    document.head.appendChild(script);
 }
 
-// Copiar e-mail pro clipboard
-const copyBtn = document.getElementById("copy-email-btn");
-const emailEl = document.getElementById("contact-email");
-
-if (copyBtn && emailEl) {
-  copyBtn.addEventListener("click", async () => {
-    const email = emailEl.textContent.trim();
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(email);
-      } else {
-        // fallback para ambientes sem clipboard API (ex: file://)
-        const ta = document.createElement("textarea");
-        ta.value = email;
-        // tornar textarea não visível
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-      }
-      // feedback: alterar label e mostrar toast
-      const labelSpan = copyBtn.querySelector(".copy-label") || copyBtn.querySelector("span:nth-child(2)");
-      const original = labelSpan ? labelSpan.textContent : "";
-      if (labelSpan) {
-        labelSpan.textContent = "Copiado!";
-        setTimeout(() => (labelSpan.textContent = original), 1500);
-      }
-      showToast("E-mail copiado para a área de transferência");
-    } catch (err) {
-      alert("Não foi possível copiar o e-mail :(");
-    }
-  });
+// Suporte para smooth scroll
+if (!('scrollBehavior' in document.documentElement.style)) {
+    console.warn('scrollBehavior não suportado. Carregando polyfill...');
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js';
+    script.onload = () => {
+        window.__forceSmoothScrollPolyfill__ = true;
+    };
+    document.head.appendChild(script);
 }
-
-// Toast helper
-function showToast(text, ms = 1800) {
-  const t = document.createElement("div");
-  t.className = "site-toast";
-  t.textContent = text;
-  document.body.appendChild(t);
-  // small delay for transition
-  requestAnimationFrame(() => t.classList.add("show"));
-  setTimeout(() => {
-    t.classList.remove("show");
-    setTimeout(() => document.body.removeChild(t), 300);
-  }, ms);
-}
-
-// Formulário de contato -> mailto
-const form = document.getElementById("contact-form");
-
-if (form && emailEl) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const subject =
-      document.getElementById("subject").value.trim() || "Contato pelo portfólio";
-    const message = document.getElementById("message").value.trim();
-
-    if (!name || !email || !message) {
-      alert("Por favor, preencha todos os campos antes de enviar.");
-      return;
-    }
-
-    const mailto = `mailto:${encodeURIComponent(
-      emailEl.textContent.trim()
-    )}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
-      `Nome: ${name}\nE-mail: ${email}\n\nMensagem:\n${message}`
-    )}`;
-    // abrir cliente de email
-    window.location.href = mailto;
-  });
-}
-
-// IntersectionObserver para animações de entrada
-(() => {
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in-view");
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  // aplicar observer a seções principais e cards
-  document.querySelectorAll("section, .grid > div, .flex.flex-col.gap-4 > div").forEach((el) => {
-    // calcular delay de stagger se o elemento estiver dentro um grid/parent
-    el.classList.add("section-reveal");
-    obs.observe(el);
-  });
-})();
-
-// aplicar stagger nos elementos observados: calcular após carregamento completo
-// para evitar posições incorretas causadas por imagens/loading. Recalcula no resize (debounced).
-function applyStagger() {
-  const els = Array.from(document.querySelectorAll('.section-reveal'));
-  // ordenar por offsetTop para garantir ordem visual
-  els.sort((a, b) => (a.getBoundingClientRect().top + window.scrollY) - (b.getBoundingClientRect().top + window.scrollY));
-  els.forEach((el, i) => {
-    const delay = Math.min(80 * i, 600); // 80ms por item, cap 600ms
-    el.style.setProperty('--reveal-delay', `${delay}ms`);
-  });
-}
-
-// run after load to ensure images/backgrounds don't shift positions
-if (document.readyState === 'complete') {
-  applyStagger();
-} else {
-  window.addEventListener('load', applyStagger);
-}
-
-// debounce helper for resize
-let _staggerResizeTimer = null;
-window.addEventListener('resize', () => {
-  clearTimeout(_staggerResizeTimer);
-  _staggerResizeTimer = setTimeout(() => {
-    applyStagger();
-  }, 150);
-});
-
-// Filtro de skills
-const skillButtons = document.querySelectorAll("[data-skill-filter]");
-const skillCards = document.querySelectorAll("[data-skill-category]");
-
-if (skillButtons.length && skillCards.length) {
-  skillButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.getAttribute("data-skill-filter");
-
-      // reset estilos
-      skillButtons.forEach((b) => {
-        b.classList.remove("bg-primary", "text-white");
-        b.classList.add(
-          "bg-slate-200",
-          "dark:bg-slate-800",
-          "text-slate-700",
-          "dark:text-slate-300"
-        );
-      });
-
-      if (filter === "all") {
-        btn.classList.add("bg-primary", "text-white");
-        btn.classList.remove(
-          "bg-slate-200",
-          "dark:bg-slate-800",
-          "text-slate-700",
-          "dark:text-slate-300"
-        );
-        skillCards.forEach((card) => (card.style.display = ""));
-      } else {
-        btn.classList.add("bg-primary", "text-white");
-        btn.classList.remove(
-          "bg-slate-200",
-          "dark:bg-slate-800",
-          "text-slate-700",
-          "dark:text-slate-300"
-        );
-        skillCards.forEach((card) => {
-          const cat = card.getAttribute("data-skill-category");
-          card.style.display = cat === filter ? "" : "none";
-        });
-      }
-    });
-  });
-}
-
-// Filtro de projetos
-const projectButtons = document.querySelectorAll("[data-project-filter]");
-const projectCards = document.querySelectorAll("[data-project-category]");
-
-if (projectButtons.length && projectCards.length) {
-  projectButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.getAttribute("data-project-filter");
-
-      // reset estilos
-      projectButtons.forEach((b) => {
-        b.classList.remove("bg-primary", "text-white");
-        b.classList.add(
-          "bg-slate-200",
-          "dark:bg-slate-800",
-          "text-slate-700",
-          "dark:text-slate-300"
-        );
-      });
-
-      if (filter === "all") {
-        btn.classList.add("bg-primary", "text-white");
-        btn.classList.remove(
-          "bg-slate-200",
-          "dark:bg-slate-800",
-          "text-slate-700",
-          "dark:text-slate-300"
-        );
-        projectCards.forEach((card) => (card.style.display = ""));
-      } else {
-        btn.classList.add("bg-primary", "text-white");
-        btn.classList.remove(
-          "bg-slate-200",
-          "dark:bg-slate-800",
-          "text-slate-700",
-          "dark:text-slate-300"
-        );
-        projectCards.forEach((card) => {
-          const cat = card.getAttribute("data-project-category");
-          card.style.display = cat === filter ? "" : "none";
-        });
-      }
-    });
-  });
-}
-
-// Fundo 3D reativo ao mouse (parallax simples)
-(function () {
-  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isTouch = window.matchMedia && window.matchMedia('(hover: none)').matches;
-  const container = document.getElementById('bg-3d');
-  if (!container || prefersReduced || isTouch) return;
-
-  const layers = Array.from(container.querySelectorAll('.bg-3d__layer'));
-  if (!layers.length) return;
-
-  let mouseX = 0;
-  let mouseY = 0;
-  let rafId = null;
-
-  function onPointerMove(e) {
-    const rect = container.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width; // 0..1
-    const y = (e.clientY - rect.top) / rect.height; // 0..1
-    // center as -0.5..0.5
-    mouseX = (x - 0.5);
-    mouseY = (y - 0.5);
-    if (!rafId) rafId = requestAnimationFrame(updateLayers);
-  }
-
-  function updateLayers() {
-    rafId = null;
-    layers.forEach((layer) => {
-      const depth = parseFloat(layer.getAttribute('data-depth')) || 0.05;
-      const moveX = -mouseX * depth * 60; // scale movement
-      const moveY = -mouseY * depth * 40;
-      const rotateX = mouseY * depth * 6; // small tilt
-      const rotateY = -mouseX * depth * 6;
-      layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-  }
-
-  // gentle reset when leaving
-  function onPointerLeave() {
-    mouseX = 0; mouseY = 0;
-    if (!rafId) rafId = requestAnimationFrame(() => {
-      layers.forEach((layer) => (layer.style.transform = 'translate3d(0,0,0) rotateX(0deg) rotateY(0deg)'));
-      rafId = null;
-    });
-  }
-
-  // use pointermove for better device support
-  window.addEventListener('pointermove', onPointerMove, { passive: true });
-  window.addEventListener('pointerleave', onPointerLeave);
-  window.addEventListener('pointercancel', onPointerLeave);
-
-  // cleanup on unload
-  window.addEventListener('unload', () => {
-    window.removeEventListener('pointermove', onPointerMove);
-    window.removeEventListener('pointerleave', onPointerLeave);
-    window.removeEventListener('pointercancel', onPointerLeave);
-    if (rafId) cancelAnimationFrame(rafId);
-  });
-})();

@@ -1,934 +1,789 @@
 <!doctype html>
 <html class="dark" lang="pt-BR">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Victor Hugo | Portfolio</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Victor Hugo - Analista de Suporte TOTVS Fluig e Desenvolvedor">
+    <meta name="keywords" content="TOTVS Fluig, Suporte Técnico, Google Workspace, JavaScript, Desenvolvimento">
+    <meta name="author" content="Victor Hugo Correia de Melo">
+    
+    <title>Victor Hugo | Analista de Suporte TOTVS Fluig</title>
 
-        <!-- Tailwind CDN -->
-        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-        <!-- Tailwind config unificado -->
-        <script id="tailwind-config">
-            tailwind.config = {
-                darkMode: "class",
-                theme: {
-                    extend: {
-                        colors: {
-                            primary: "#135bec",
-                            "background-light": "#f6f6f8",
-                            "background-dark": "#111318",
-                            success: "#34A853",
-                            error: "#EA4335",
-                        },
-                        fontFamily: {
-                            display: ["Inter", "sans-serif"],
-                        },
-                        borderRadius: {
-                            DEFAULT: "0.25rem",
-                            lg: "0.5rem",
-                            xl: "0.75rem",
-                            full: "9999px",
-                        },
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Victor Hugo - Analista de Suporte TOTVS Fluig">
+    <meta property="og:description" content="Profissional de TI especializado em suporte técnico e automação de processos empresariais">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#135bec",
+                        "primary-hover": "#0f4bc7",
+                        "secondary": "#10b981",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111318",
+                        "surface-light": "rgba(255, 255, 255, 0.7)",
+                        "surface-dark": "rgba(17, 19, 24, 0.8)",
+                        "success": "#34A853",
+                        "error": "#EA4335",
+                        "warning": "#FBBC05",
                     },
+                    fontFamily: {
+                        "display": ["Inter", "system-ui", "-apple-system", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px",
+                    },
+                    animation: {
+                        "float": "float 6s ease-in-out infinite",
+                        "fade-in": "fadeIn 0.8s ease-out forwards",
+                        "slide-up": "slideUp 0.8s ease-out forwards",
+                        "scale-in": "scaleIn 0.6s ease-out forwards",
+                    },
+                    keyframes: {
+                        float: {
+                            "0%, 100%": { transform: "translateY(0px)" },
+                            "50%": { transform: "translateY(-20px)" }
+                        },
+                        fadeIn: {
+                            "0%": { opacity: "0" },
+                            "100%": { opacity: "1" }
+                        },
+                        slideUp: {
+                            "0%": { transform: "translateY(30px)", opacity: "0" },
+                            "100%": { transform: "translateY(0)", opacity: "1" }
+                        },
+                        scaleIn: {
+                            "0%": { transform: "scale(0.9)", opacity: "0" },
+                            "100%": { transform: "scale(1)", opacity: "1" }
+                        }
+                    }
                 },
-            };
-        </script>
+            },
+            variants: {
+                extend: {
+                    animation: ["motion-safe"],
+                }
+            }
+        };
+    </script>
 
-        <!-- Fonts -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-            rel="stylesheet"
-        />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
-        <!-- Spline viewer (3D background) -->
-        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.5/build/spline-viewer.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+    
+    <!-- Favicon / App Icons: usar logo PNG fornecida -->
+    <link rel="icon" type="image/png" href="assets/img/logo-vhcm-tech-solutions.png">
+    <link rel="apple-touch-icon" href="assets/img/logo-vhcm-tech-solutions.png">
+    <meta name="msapplication-TileImage" content="assets/img/logo-vhcm-tech-solutions.png">
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 antialiased">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded-lg z-50">Pular para conteúdo principal</a>
 
-        <!-- Seu CSS próprio -->
-        <link rel="stylesheet" href="css/custom.css" />
-    </head>
-    <body class="font-display bg-background-light dark:bg-background-dark">
-        <!-- Fundo 3D do Hero (Stitch Home) -->
-        <div class="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden" style="background: #2E3A4A;">
-            <div class="absolute inset-0 z-0">
-                <!-- Spline viewer como fundo 3D. URL fornecida pelo usuário. -->
-                <!-- <div class="spline-viewer-wrapper absolute inset-0">
-                    <spline-viewer class="spline-viewer" url="" loading="lazy">
-                        
-                    </spline-viewer>
-                </div> -->
-                <div class="absolute inset-0 bg-background-light/60 dark:bg-background-dark/50 backdrop-blur-sm bg-overlay"></div>
-            </div>
+    <!-- Background Container -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <!-- 3D Background (commented but ready) -->
+        <!-- <div id="bg-3d" class="absolute inset-0" aria-hidden="true"></div> -->
+        
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-purple-50/20 dark:from-gray-900/90 dark:to-blue-900/20"></div>
+    </div>
 
-            <div class="relative z-10 flex h-full grow flex-col">
-                <!-- NAVBAR GLOBAL -->
-                <header
-                    class="flex items-center justify-between whitespace-nowrap px-4 sm:px-8 md:px-10 lg:px-20 py-5 md:py-6"
-                >
-                    <div class="flex items-center gap-3 text-gray-800 dark:text-white">
-                        <div class="h-7 w-7 text-primary">
-                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
-                                    fill="currentColor"
-                                ></path>
-                            </svg>
-                        </div>
-                        <h2 class="text-lg font-bold tracking-tight">Victor Hugo · Dev / Suporte N3</h2>
-                    </div>
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 w-full transition-all duration-300 bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <nav class="flex items-center justify-between" aria-label="Navegação principal">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center gap-3 group" aria-label="Início - Voltar ao topo">
+                    <img src="assets/img/logo-vhcm-tech-solutions.png" alt="Victor Hugo - VHCM Tech Solutions" class="h-8 w-8 object-contain transition-transform group-hover:scale-110" loading="lazy" width="32" height="32">
+                    <span class="text-lg font-bold tracking-tight text-gray-900 dark:text-white">Victor Hugo</span><span> | VHCM Tech Solutions</span>
+                </a>
 
-                    <!-- Menu desktop -->
-                    <div class="hidden items-center gap-8 md:flex">
-                        <nav class="flex items-center gap-6 text-sm font-medium">
-                            <a
-                                href="#home"
-                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
-                                >Home</a
-                            >
-                            <a
-                                href="#about"
-                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
-                                >Sobre</a
-                            >
-                            <a
-                                href="#skills"
-                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
-                                >Habilidades</a
-                            >
-                            <a
-                                href="#experience"
-                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
-                                >Experiência</a
-                            >
-                            <a
-                                href="#projects"
-                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
-                                >Projetos</a
-                            >
-                            <a
-                                href="#contact"
-                                class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
-                                >Contato</a
-                            >
-                        </nav>
-                        <button
-                            data-scroll-to="#contact"
-                            class="flex h-10 min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white transition-colors hover:bg-primary/90"
-                        >
-                            <span class="truncate">Entre Em Contato</span>
-                        </button>
-                    </div>
-
-                    <!-- Menu mobile -->
-                    <button
-                        class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-transparent text-gray-800 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800 md:hidden"
-                        id="mobile-menu-btn"
-                    >
-                        <span class="material-symbols-outlined">menu</span>
-                    </button>
-                </header>
-
-                <!-- MENU MOBILE DROPDOWN -->
-                <nav
-                    id="mobile-menu"
-                    class="md:hidden mx-4 rounded-xl bg-white/90 dark:bg-background-dark/95 text-sm text-gray-700 dark:text-gray-200 shadow-lg border border-gray-200/70 dark:border-gray-700/70"
-                    aria-hidden="true"
-                >
-                    <ul class="flex flex-col divide-y divide-gray-200/70 dark:divide-gray-700/70">
-                        <li><a href="#home" class="block px-4 py-3" data-mobile-link>Home</a></li>
-                        <li><a href="#about" class="block px-4 py-3" data-mobile-link>Sobre</a></li>
-                        <li><a href="#skills" class="block px-4 py-3" data-mobile-link>Habilidades</a></li>
-                        <li><a href="#experience" class="block px-4 py-3" data-mobile-link>Experiência</a></li>
-                        <li><a href="#projects" class="block px-4 py-3" data-mobile-link>Projetos</a></li>
-                        <li><a href="#contact" class="block px-4 py-3" data-mobile-link>Contato</a></li>
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-8">
+                    <ul class="flex items-center gap-6 text-sm font-medium" role="menubar">
+                        <li role="none"><a href="#home" class="text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50" role="menuitem">Home</a></li>
+                        <li role="none"><a href="#about" class="text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50" role="menuitem">Sobre</a></li>
+                        <li role="none"><a href="#skills" class="text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50" role="menuitem">Habilidades</a></li>
+                        <li role="none"><a href="#experience" class="text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50" role="menuitem">Experiência</a></li>
+                        <li role="none"><a href="#projects" class="text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50" role="menuitem">Projetos</a></li>
+                        <li role="none"><a href="#contact" class="text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/50" role="menuitem">Contato</a></li>
                     </ul>
-                </nav>
+                    <button type="button" data-scroll-to="#contact" class="btn-primary" aria-label="Entre em contato">
+                        <span class="truncate">Entre Em Contato</span>
+                    </button>
+                </div>
 
-                <!-- CONTEÚDO -->
-                <main class="flex flex-col gap-20 pb-12">
-                    <!-- HOME / HERO -->
-                    <section
-                        id="home"
-                        class="flex flex-1 flex-col items-center justify-center text-center px-4 pt-10 pb-16"
-                    >
-                        <div class="flex flex-col items-center gap-6 py-10">
-                            <div class="flex flex-col gap-3">
-                                <h1
-                                    class="text-5xl font-black tracking-tighter text-gray-900 dark:text-white sm:text-6xl md:text-7xl lg:text-8xl"
-                                >
-                                    Victor Hugo
-                                </h1>
-                                <h2 class="text-lg font-medium text-gray-600 dark:text-gray-300 sm:text-xl md:text-2xl">
-                                    Dev / IT · Suporte Técnico · Automação de Processos
-                                </h2>
-                            </div>
-                            <button
-                                class="flex h-12 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-6 text-base font-bold text-white transition-transform hover:scale-105"
-                                data-scroll-to="#projects"
-                            >
-                                <span class="truncate">Visualizar Meu Trabalho</span>
-                            </button>
-                        </div>
-
-                        <footer class="flex items-center justify-center pb-4 pt-2">
-                            <a
-                                class="flex flex-col items-center gap-1 text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary"
-                                href="#about"
-                            >
-                                <span class="material-symbols-outlined animate-bounce">expand_more</span>
-                            </a>
-                        </footer>
-                    </section>
-
-                    <!-- ABOUT -->
-                    <section id="about" class="relative flex w-full justify-center px-4 sm:px-6 lg:px-8">
-                        <div
-                            class="flex flex-col max-w-5xl flex-1 gap-10 bg-white/60 dark:bg-background-dark/70 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg"
-                        >
-                            <div class="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
-                                <div class="flex-shrink-0 mx-auto md:mx-0">
-                                    <div
-                                        class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-36 w-36 md:h-48 md:w-48 shadow-lg"
-                                        data-alt="Professional headshot of the website owner"
-                                        style="
-                                            background-image: url(&quot;assets/img/avatar.jpg&quot;);
-                                        "
-                                    ></div>
-                                </div>
-                                <div class="flex flex-col justify-center gap-4 text-center md:text-left">
-                                    <h1
-                                        class="text-slate-900 dark:text-white text-3xl md:text-4xl font-bold leading-tight tracking-tight"
-                                    >
-                                        Sobre mim
-                                    </h1>
-                                        <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
-                                        Profissional de TI com foco em <strong>suporte técnico</strong> e
-                                        <strong>automação de processos empresariais</strong>. Tenho experiência no
-                                        ecossistema <strong>TOTVS Fluig</strong> e <strong>Google Workspace</strong>,
-                                        atuando em manutenção de hardware e software, gerenciamento de contas e redes,
-                                        além de desenvolvimento em <strong>JavaScript, HTML e CSS</strong>.
-                                        </p>
-                                        <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
-                                        Já participei de projetos que reduziram o volume de chamados e criaram fluxos
-                                        automatizados para processos internos. Gosto de unir suporte ao usuário,
-                                        melhoria contínua e documentação bem feita.
-                                        </p>
-                                        <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
-                                        Sou graduando em Tecnologia em Análise e Desenvolvimento de Sistemas (TADS) e
-                                        busco constantemente aprender e aplicar novas soluções que façam diferença no
-                                        dia a dia das empresas.
-                                        </p>
-                                    <div class="flex items-center justify-center md:justify-start pt-2">
-                                        <button
-                                            class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
-                                        >
-                                            <span class="truncate">Baixar CV</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col gap-4">
-                                <h3
-                                    class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight"
-                                >
-                                    Minhas Tecnologias
-                                </h3>
-                                <div class="flex gap-3 flex-wrap">
-                                <div
-                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
-                                >
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">JavaScript</p>
-                                </div>
-                                <div
-                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
-                                >
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">HTML &amp; CSS</p>
-                                </div>
-                                <div
-                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
-                                >
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">TOTVS Fluig</p>
-                                </div>
-                                <div
-                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
-                                >
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Google Workspace</p>
-                                </div>
-                                <div
-                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
-                                >
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Suporte N1 · N2 · N3</p>
-                                </div>
-                                <div
-                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
-                                >
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Hardware &amp; Redes</p>
-                                </div>
-                                <div
-                                    class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 px-4 transition-colors hover:bg-slate-300 dark:hover:bg-slate-700/80"
-                                >
-                                    <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Automação de Processos</p>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- SKILLS -->
-                    <section id="skills" class="relative flex h-auto w-full flex-col px-4 sm:px-6 lg:px-8">
-                        <div class="mx-auto flex w-full max-w-7xl flex-1 justify-center">
-                            <div class="flex w-full max-w-4xl flex-col">
-                                    <h2
-                                    class="text-slate-900 dark:text-white text-3xl font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 text-center"
-                                >
-                                    Habilidades e Tecnologias
-                                </h2>
-                                <div class="flex flex-wrap items-center justify-center gap-2 p-3 sm:gap-3">
-                                        <button
-                                            class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-primary px-4"
-                                            data-skill-filter="all"
-                                        >
-                                            <p class="text-white text-sm font-medium">Todos</p>
-                                        </button>
-                                    <button
-                                        class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-slate-200 px-4 transition-colors hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
-                                        data-skill-filter="frontend"
-                                    >
-                                        <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Frontend</p>
-                                    </button>
-                                    <button
-                                        class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-slate-200 px-4 transition-colors hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
-                                        data-skill-filter="backend"
-                                    >
-                                        <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Backend</p>
-                                    </button>
-                                    <button
-                                        class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-slate-200 px-4 transition-colors hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
-                                        data-skill-filter="infra"
-                                    >
-                                        <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">
-                                            Infra &amp; Suporte
-                                        </p>
-                                    </button>
-                                </div>
-
-                                <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-4 mt-3">
-                                    <div
-                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
-                                        data-skill-category="frontend"
-                                    >
-                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
-                                            >javascript</span
-                                        >
-                                        <div class="flex flex-col gap-2">
-                                            <h3
-                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
-                                            >
-                                                JavaScript
-                                            </h3>
-                                            <p class="text-slate-500 dark:text-slate-400 text-sm">Intermediário</p>
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
-                                        data-skill-category="frontend"
-                                    >
-                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
-                                            >html</span
-                                        >
-                                        <div class="flex flex-col gap-2">
-                                            <h3
-                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
-                                            >
-                                                HTML5
-                                            </h3>
-                                            <p class="text-slate-500 dark:text-slate-400 text-sm">Avançado</p>
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
-                                        data-skill-category="frontend"
-                                    >
-                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
-                                            >css</span
-                                        >
-                                        <div class="flex flex-col gap-2">
-                                            <h3
-                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
-                                            >
-                                                CSS3
-                                            </h3>
-                                            <p class="text-slate-500 dark:text-slate-400 text-sm">Avançado</p>
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
-                                        data-skill-category="backend"
-                                    >
-                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
-                                            >developer_mode_tv</span
-                                        >
-                                        <div class="flex flex-col gap-2">
-                                            <h3
-                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
-                                            >
-                                                API / Node-like
-                                            </h3>
-                                            <p class="text-slate-500 dark:text-slate-400 text-sm">
-                                                Básico / Intermediário
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
-                                        data-skill-category="infra"
-                                    >
-                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
-                                            >computer</span
-                                        >
-                                        <div class="flex flex-col gap-2">
-                                            <h3
-                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
-                                            >
-                                                Support &amp; Hardware
-                                            </h3>
-                                            <p class="text-slate-500 dark:text-slate-400 text-sm">N1 · N2 · N3</p>
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 transition-all hover:shadow-lg hover:-translate-y-1 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-primary/50"
-                                        data-skill-category="infra"
-                                    >
-                                        <span class="material-symbols-outlined text-slate-600 dark:text-slate-400"
-                                            >cloud</span
-                                        >
-                                        <div class="flex flex-col gap-2">
-                                            <h3
-                                                class="text-slate-900 dark:text-white text-base font-semibold leading-tight"
-                                            >
-                                                Google Workspace Admin
-                                            </h3>
-                                            <p class="text-slate-500 dark:text-slate-400 text-sm">
-                                                Contas, domínios, backups
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- EXPERIENCE -->
-                    <section
-                        id="experience"
-                        class="relative flex min-h-screen w-full flex-col items-center overflow-x-hidden px-4 sm:px-6 lg:px-8"
-                    >
-                        <div class="flex w-full max-w-4xl grow flex-col py-10">
-                            <header class="mb-8 text-center">
-                                <h2 class="text-4xl font-bold tracking-tighter text-zinc-900 dark:text-white sm:text-5xl">
-                                    Experiência Profissional
-                                </h2>
-                                <p class="mx-auto mt-4 max-w-2xl text-base text-zinc-600 dark:text-zinc-400">
-                                    Uma linha do tempo da minha trajetória profissional, destacando as principais funções, responsabilidades e tecnologias com as quais trabalhei.
-                                </p>
-                            </header>
-
-                        <main class="relative flex flex-col gap-10">
-                            <div class="absolute left-4 top-4 bottom-4 w-0.5 bg-zinc-200 dark:bg-zinc-900 sm:left-1/2 sm:-ml-[1px]"></div>
-                            <!-- SB Group -->
-                            <div class="relative flex items-start sm:items-center">
-                                <div
-                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
-                                    >
-                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
-                                        <span class="material-symbols-outlined text-xl">work</span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="ml-auto flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)]"
-                                    >
-                                    <div class="flex flex-col gap-1">
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">nov 2023 – atual</p>
-                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">Analista de Suporte de TI</p>
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">SB Group / Thealth · Cascavel, PR</p>
-                                    </div>
-                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
-                                        <li>Suporte técnico N1, N2 e N3 para usuários internos.</li>
-                                        <li>Implantação e manutenção do sistema TOTVS Fluig, com foco em melhoria de processos.</li>
-                                        <li>Administração do Google Workspace: contas, senhas, backups, domínios e acompanhamento de redes.</li>
-                                    </ul>
-                                    <div class="mt-4 flex flex-wrap gap-2">
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Fluig</span>
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Google Workspace</span>
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Suporte</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- T-Health Sistemas -->
-                            <div class="relative flex items-start sm:items-center">
-                                <div
-                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
-                                    >
-                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
-                                        <span class="material-symbols-outlined text-xl">developer_mode</span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)] sm:self-start"
-                                    >
-                                    <div class="flex flex-col gap-1">
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">fev 2024 – nov 2025</p>
-                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">Analista de Desenvolvimento Fluig</p>
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">T-Health Sistemas · Cascavel, PR</p>
-                                    </div>
-                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
-                                        <li>Atuação em projetos Fluig com foco em automações e processos.</li>
-                                        <li>Participação em iniciativas em parceria com a Unimed FESP.</li>
-                                        <li>Atendimento de incidentes, melhorias, documentação e evidências técnicas.</li>
-                                    </ul>
-                                    <div class="mt-4 flex flex-wrap gap-2">
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Fluig</span>
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Automação</span>
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Documentação</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- iSoft Sistemas -->
-                            <div class="relative flex items-start sm:items-center">
-                                <div
-                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
-                                    >
-                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
-                                        <span class="material-symbols-outlined text-xl">support_agent</span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="ml-auto flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)]"
-                                    >
-                                    <div class="flex flex-col gap-1">
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">out 2023 – nov 2023</p>
-                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">Helpdesk</p>
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">iSoft Sistemas · Cascavel, PR</p>
-                                    </div>
-                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
-                                        <li>Atendimento a usuários em ambiente corporativo, com foco em suporte ao sistema.</li>
-                                        <li>Registro e acompanhamento de chamados, garantindo retorno dentro dos prazos.</li>
-                                    </ul>
-                                    <div class="mt-4 flex flex-wrap gap-2">
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Helpdesk</span>
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Atendimento ao usuário</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- JBI Serviços -->
-                            <div class="relative flex items-start sm:items-center">
-                                <div
-                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
-                                    >
-                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
-                                        <span class="material-symbols-outlined text-xl">computer</span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)] sm:self-start"
-                                    >
-                                    <div class="flex flex-col gap-1">
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">jul 2023 – ago 2023</p>
-                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">
-                                            Técnico de Apoio ao Usuário de Informática (Helpdesk)
-                                        </p>
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">JBI Serviços · Cascavel, PR</p>
-                                    </div>
-                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
-                                        <li>Participação em projeto de refresh de equipamentos para a DXC.</li>
-                                        <li>Formatação, atualização de drivers, configuração padrão e backup/restauração de dados.</li>
-                                        <li>Entrega de novos equipamentos e recolhimento dos antigos com documentação organizada.</li>
-                                    </ul>
-                                    <div class="mt-4 flex flex-wrap gap-2">
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Hardware</span>
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Refresh</span>
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Documentação</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- SEASO -->
-                            <div class="relative flex items-start sm:items-center">
-                                <div
-                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
-                                    >
-                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
-                                        <span class="material-symbols-outlined text-xl">lan</span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="ml-auto flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)]"
-                                    >
-                                    <div class="flex flex-col gap-1">
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">nov 2022 – mar 2023</p>
-                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">Auxiliar de Informática</p>
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">
-                                            SEASO – Departamento de Assistência Social · Cascavel, PR
-                                        </p>
-                                    </div>
-                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
-                                        <li>Gestão de softwares, com foco em segurança, estabilidade e disponibilidade dos sistemas.</li>
-                                        <li>Suporte técnico presencial e remoto para usuários internos.</li>
-                                        <li>Montagem, instalação de computadores e configuração/manutenção de redes.</li>
-                                    </ul>
-                                    <div class="mt-4 flex flex-wrap gap-2">
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Redes</span>
-                                        <span class="flex h-7 shrink-0 items-center justify-center rounded-full bg-primary/20 px-3 text-xs text-primary">Suporte</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Maffini / Lojas O Doidão (experiência comercial) -->
-                            <div class="relative flex items-start sm:items-center">
-                                <div
-                                    class="absolute left-4 top-4 z-10 h-8 w-8 -translate-x-1/2 transform rounded-full bg-background-light ring-8 ring-background-light dark:bg-background-dark dark:ring-background-dark sm:left-1/2 sm:top-1/2 sm:-translate-y-1/2"
-                                    >
-                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-primary/20 text-primary">
-                                        <span class="material-symbols-outlined text-xl">storefront</span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="flex w-full flex-col rounded-lg bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 dark:bg-[#1c1f27] dark:ring-white/10 sm:w-[calc(50%-2rem)] sm:self-start"
-                                    >
-                                    <div class="flex flex-col gap-1">
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">abr 2022 – nov 2022</p>
-                                        <p class="text-lg font-bold text-zinc-900 dark:text-white">Vendedor Interno</p>
-                                        <p class="text-sm text-zinc-500 dark:text-zinc-400">Maffini Material de Construção · Cascavel, PR</p>
-                                    </div>
-                                    <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
-                                        <li>Atuação em vendas e atendimento ao cliente, com foco em metas e faturamento.</li>
-                                        <li>Experiência em vitrine, exposição de produtos e organização de loja.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </main>
-                        </div>
-                    </section>
-
-                    <!-- PROJECTS -->
-                    <section id="projects" class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden px-4 sm:px-6 lg:px-8" >
-                        <div class="flex h-full grow flex-col">
-                            <main class="py-10 sm:py-14 lg:py-18 flex flex-1 justify-center">
-                                <div class="flex flex-col w-full max-w-7xl">
-                                    <div class="flex flex-col items-center gap-4 text-center">
-                                        <h1
-                                            class="text-slate-900 dark:text-white tracking-tight text-4xl md:text-5xl font-bold leading-tight"
-                                        >
-                                            Projetos em Destaque
-                                        </h1>
-                                        <p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl">
-                                            Aqui estão alguns projetos dos quais me orgulho. Use os filtros para explorar.
-                                        </p>
-                                    </div>
-
-                                    <div class="flex justify-center gap-2 sm:gap-3 p-3 flex-wrap mt-8">
-                                        <button
-                                            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full px-4 text-sm font-medium bg-primary text-white"
-                                            data-project-filter="all"
-                                        >
-                                            Todos
-                                        </button>
-                                        <button
-                                            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full px-4 text-sm font-medium bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700"
-                                            data-project-filter="fluig"
-                                        >
-                                            Fluig
-                                        </button>
-                                        <button
-                                            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full px-4 text-sm font-medium bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700"
-                                            data-project-filter="workspace"
-                                        >
-                                            Google Workspace
-                                        </button>
-                                        <button
-                                            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full px-4 text-sm font-medium bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700"
-                                            data-project-filter="infra"
-                                        >
-                                            Infra / Suporte
-                                        </button>
-                                    </div>
-
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 p-4 mt-4">
-                                        <div
-                                            class="flex flex-col gap-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 transition-all hover:shadow-lg hover:-translate-y-1"
-                                            data-project-category="fluig"
-                                        >
-                                            <div
-                                                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-                                                data-alt="Fluig forms and workflows"
-                                                style="
-                                                    background-image: url(&quot;https://images.pexels.com/photos/2706379/pexels-photo-2706379.jpeg?auto=compress&cs=tinysrgb&w=1200&quot;);
-                                                "
-                                            ></div>
-                                            <div class="flex flex-col flex-1 project-card">
-                                                <h3
-                                                    class="text-slate-900 dark:text-white text-lg font-semibold leading-normal"
-                                                >
-                                                    Workflows e Forms (Fluig)
-                                                </h3>
-                                                <p class="text-slate-600 dark:text-slate-400 text-sm mt-1 flex-1">
-                                                    Desenvolvimento e suporte em fluxos de aprovação, cadastros e
-                                                    integrações com Protheus/RM.
-                                                </p>
-                                                <div class="flex flex-wrap gap-2 mt-4">
-                                                    <span
-                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary"
-                                                        >Fluig</span
-                                                    >
-                                                    <span
-                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
-                                                        >JavaScript</span
-                                                    >
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div
-                                            class="flex flex-col gap-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 transition-all hover:shadow-lg hover:-translate-y-1"
-                                            data-project-category="workspace"
-                                        >
-                                            <div
-                                                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-                                                data-alt="Google Workspace admin dashboard"
-                                                style="
-                                                    background-image: url(&quot;https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200&quot;);
-                                                "
-                                            ></div>
-                                            <div class="flex flex-col flex-1 project-card">
-                                                <h3
-                                                    class="text-slate-900 dark:text-white text-lg font-semibold leading-normal"
-                                                >
-                                                    Administração Google Workspace
-                                                </h3>
-                                                <p class="text-slate-600 dark:text-slate-400 text-sm mt-1 flex-1">
-                                                    Organização de contas, grupos, domínios, permissões e rotinas de
-                                                    backup para ambiente corporativo.
-                                                </p>
-                                                <div class="flex flex-wrap gap-2 mt-4">
-                                                    <span
-                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary"
-                                                        >Google Workspace</span
-                                                    >
-                                                    <span
-                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
-                                                        >Suporte</span
-                                                    >
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div
-                                            class="flex flex-col gap-4 bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 p-5 transition-all hover:shadow-lg hover:-translate-y-1"
-                                            data-project-category="infra"
-                                        >
-                                            <div
-                                                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-                                                data-alt="IT hardware refresh"
-                                                style="
-                                                    background-image: url(&quot;https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200&quot;);
-                                                "
-                                            ></div>
-                                            <div class="flex flex-col flex-1 project-card">
-                                                <h3
-                                                    class="text-slate-900 dark:text-white text-lg font-semibold leading-normal"
-                                                >
-                                                    Atualização de Hardware e Suporte
-                                                </h3>
-                                                <p class="text-slate-600 dark:text-slate-400 text-sm mt-1 flex-1">
-                                                    Projetos de troca de parque tecnológico, formatação, backup e
-                                                    entrega de novos equipamentos para usuários.
-                                                </p>
-                                                <div class="flex flex-wrap gap-2 mt-4">
-                                                    <span
-                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary"
-                                                        >Infra</span
-                                                    >
-                                                    <span
-                                                        class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
-                                                        >Helpdesk</span
-                                                    >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </main>
-                        </div>
-                    </section>
-
-                    <!-- CONTACT -->
-                    <section
-                        id="contact"
-                        class="relative flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden p-4 sm:p-6 md:p-8"
-                    >
-                        <div
-                            class="w-full max-w-6xl rounded-xl bg-white/60 dark:bg-white/5 backdrop-blur-sm p-8 md:p-12 lg:p-16 shadow-xl"
-                        >
-                            <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
-                                <div class="flex flex-col justify-center">
-                                    <h2
-                                        class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl"
-                                    >
-                                        Fale Comigo
-                                    </h2>
-                                    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
-                                        Tem um projeto em mente, uma dúvida ou quer se conectar? Fique à vontade para
-                                        entrar em contato. Estou aberto a novas oportunidades e colaborações.
-                                    </p>
-
-                                    <div
-                                        class="mt-8 flex items-center gap-4 rounded-lg bg-slate-100 dark:bg-slate-800/50 p-4"
-                                    >
-                                        <div
-                                            class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary"
-                                        >
-                                            <span class="material-symbols-outlined">mail</span>
-                                        </div>
-                                        <div>
-                                            <p id="contact-email" class="font-semibold text-slate-900 dark:text-white">
-                                                victorhugocorreiamelo@gmail.com
-                                            </p>
-                                            <p class="text-sm text-slate-500 dark:text-slate-400">
-                                                Clique no botão para copiar
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="mt-4">
-                                        <button
-                                            id="copy-email-btn"
-                                            class="flex h-12 w-full cursor-pointer items-center justify-center gap-2.5 overflow-hidden rounded-lg bg-slate-200 px-5 text-base font-bold text-slate-700 transition hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
-                                        >
-                                            <span class="material-symbols-outlined text-xl">content_copy</span>
-                                            <span class="truncate copy-label">Copiar E-mail</span>
-                                        </button>
-                                    </div>
-
-                                    <div class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-800">
-                                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
-                                            Me encontre nas redes sociais
-                                        </h3>
-                                        <div class="mt-4 flex gap-4">
-                                            <a
-                                                aria-label="LinkedIn"
-                                                class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-200 text-slate-600 transition hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
-                                                href="https://www.linkedin.com/in/victor-hugo-correia-de-melo"
-                                                target="_blank"
-                                            >
-                                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                                                    ></path>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div
-                                    class="rounded-xl bg-white p-6 shadow-lg ring-1 ring-slate-200/50 dark:bg-slate-900/70 dark:ring-slate-800/50 sm:p-8"
-                                >
-                                    <form id="contact-form" class="space-y-6">
-                                        <div>
-                                            <label
-                                                    class="block text-sm font-medium leading-6 text-slate-900 dark:text-slate-200"
-                                                    for="name"
-                                                    >Nome</label
-                                                >
-                                            <div class="mt-2">
-                                                <input
-                                                    autocomplete="name"
-                                                    class="block w-full rounded-lg border-0 bg-slate-100 dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-700 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition"
-                                                    id="name"
-                                                    name="name"
-                                                    placeholder="Digite seu nome"
-                                                    type="text"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block text-sm font-medium leading-6 text-slate-900 dark:text-slate-200"
-                                                for="email"
-                                                >E-mail</label
-                                            >
-                                            <div class="mt-2">
-                                                <input
-                                                    autocomplete="email"
-                                                    class="block w-full rounded-lg border-0 bg-slate-100 dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-700 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition"
-                                                    id="email"
-                                                    name="email"
-                                                    placeholder="Digite seu e-mail"
-                                                    type="email"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block text-sm font-medium leading-6 text-slate-900 dark:text-slate-200"
-                                                for="subject"
-                                                >Assunto</label
-                                            >
-                                            <div class="mt-2">
-                                                <input
-                                                    class="block w-full rounded-lg border-0 bg-slate-100 dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-700 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition"
-                                                    id="subject"
-                                                    name="subject"
-                                                    placeholder="Sobre o que é?"
-                                                    type="text"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block text-sm font-medium leading-6 text-slate-900 dark:text-slate-200"
-                                                for="message"
-                                                >Mensagem</label
-                                            >
-                                            <div class="mt-2">
-                                                <textarea
-                                                    class="block w-full rounded-lg border-0 bg-slate-100 dark:bg-slate-800 py-3 px-4 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-700 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition"
-                                                    id="message"
-                                                    name="message"
-                                                    placeholder="Sua mensagem aqui..."
-                                                    rows="4"
-                                                ></textarea>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <button
-                                                class="flex w-full justify-center rounded-xl bg-primary px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition disabled:opacity-50 disabled:cursor-not-allowed"
-                                                type="submit"
-                                            >
-                                                Enviar Mensagem
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </main>
-
-                <footer class="flex items-center justify-center pb-6 pt-2 text-xs text-slate-500 dark:text-slate-400">
-                    © <span id="year" class="mx-1"></span> Victor Hugo · VHCM Tech Solutions
-                </footer>
-            </div>
+                <!-- Mobile Menu Button -->
+                <button type="button" id="mobile-menu-btn" class="flex md:hidden h-10 w-10 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="mobile-menu">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+            </nav>
         </div>
 
-        <!-- JS externo -->
-        <script src="js/main.js"></script>
-    </body>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden absolute top-full left-4 right-4 mx-auto bg-surface-light dark:bg-surface-dark backdrop-blur-lg rounded-xl shadow-2xl border border-gray-200/50 dark:border-gray-800/50 overflow-hidden transition-all duration-300 transform scale-95 opacity-0 -translate-y-4" aria-hidden="true" role="menu" aria-labelledby="mobile-menu-btn">
+            <ul class="divide-y divide-gray-200/50 dark:divide-gray-800/50" role="none">
+                <li role="none"><a href="#home" class="block px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors" role="menuitem" data-mobile-link>Home</a></li>
+                <li role="none"><a href="#about" class="block px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors" role="menuitem" data-mobile-link>Sobre</a></li>
+                <li role="none"><a href="#skills" class="block px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors" role="menuitem" data-mobile-link>Habilidades</a></li>
+                <li role="none"><a href="#experience" class="block px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors" role="menuitem" data-mobile-link>Experiência</a></li>
+                <li role="none"><a href="#projects" class="block px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors" role="menuitem" data-mobile-link>Projetos</a></li>
+                <li role="none"><a href="#contact" class="block px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors" role="menuitem" data-mobile-link>Contato</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="relative">
+        <!-- Hero Section -->
+        <section id="home" class="flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto text-center">
+                <div class="animate-fade-in">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-black tracking-tighter text-gray-900 dark:text-white mb-6">
+                        <span>Victor Hugo</span>
+                        <span class="text-primary mt-2">Correia de Melo</span>
+                    </h1>
+                    
+                    <p class="text-xl sm:text-2xl md:text-2xl font-medium text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                        Analista de Suporte Técnico · TOTVS Fluig · Automação de Processos
+                    </p>
+                    
+                    <p class="text-lg text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+                        Transformando desafios técnicos em soluções eficientes através do suporte especializado e automação inteligente.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <!-- Download CV -->
+                        <a href="assets/cv/Victor_Hugo_Correia_de_Melo_CV.pdf" download="Victor_Hugo_Correia_de_Melo_CV.pdf" class="btn-primary animate-slide-up inline-flex items-center justify-center" aria-label="Baixar currículo em PDF" rel="noopener noreferrer">
+                            <span class="material-symbols-outlined mr-2" aria-hidden="true">download</span>
+                            Baixar CV
+                        </a>
+                        <button type="button" data-scroll-to="#projects" class="btn-primary animate-slide-up" aria-label="Ver meus projetos">
+                            <span class="material-symbols-outlined mr-2" aria-hidden="true">visibility</span>
+                            Ver Projetos
+                        </button>
+                        <a href="#contact" class="btn-secondary animate-slide-up" aria-label="Entrar em contato">
+                            <span class="material-symbols-outlined mr-2" aria-hidden="true">mail</span>
+                            Contato
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <!-- Profile Image -->
+                    <div class="relative animate-scale-in">
+                        <div class="relative w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden shadow-2xl border-8 border-white dark:border-gray-800">
+                            <img 
+                                src="assets/img/avatar.jpg" 
+                                alt="Victor Hugo Correia de Melo - Analista de Suporte Técnico"
+                                class="w-full h-full object-cover"
+                                loading="lazy"
+                                width="320"
+                                height="320"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- About Content -->
+                    <div class="animate-fade-in">
+                        <header class="mb-8">
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Sobre Mim</h2>
+                            <div class="w-16 h-1 bg-primary rounded-full"></div>
+                        </header>
+                        
+                        <div class="prose prose-lg dark:prose-invert max-w-none">
+                            <p class="mb-4">
+                                Profissional de TI com foco em <strong>suporte técnico</strong> e 
+                                <strong>automação de processos empresariais</strong>. Tenho experiência no 
+                                ecossistema <strong>TOTVS Fluig</strong> e <strong>Google Workspace</strong>, 
+                                atuando em manutenção de hardware e software, gerenciamento de contas e redes, 
+                                além de desenvolvimento em <strong>JavaScript, HTML e CSS</strong>.
+                            </p>
+                            <p class="mb-4">
+                                Já participei de projetos que <strong>reduziram o volume de chamados</strong> e 
+                                criaram fluxos automatizados para processos internos. Gosto de unir suporte ao 
+                                usuário, melhoria contínua e documentação bem feita.
+                            </p>
+                            <p class="mb-8">
+                                Sou graduando em <strong>Tecnologia em Análise e Desenvolvimento de Sistemas (TADS)</strong> e 
+                                busco constantemente aprender e aplicar novas soluções que façam diferença no 
+                                dia a dia das empresas.
+                            </p>
+                        </div>
+                        
+                        <!-- Tech Stack -->
+                        <div class="mt-8">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Tecnologias Principais</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-badge">Git / GitHub</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">TOTVS Fluig</span>
+                                <span class="tech-badge">Google Workspace</span>
+                                <span class="tech-badge">HTML5 & CSS3</span>
+                                <span class="tech-badge">Suporte N1/N2/N3</span>
+                                <span class="tech-badge">Office 365</span>
+                                <span class="tech-badge">Automação</span>
+                            </div>
+                            <!-- More skills (collapsible) -->
+                            <details class="mt-4">
+                                <summary class="text-sm font-medium cursor-pointer">Ver mais competências</summary>
+                                <div class="mt-3 flex flex-wrap gap-2">
+                                    <span class="tech-badge">APIs & Postman</span>
+                                    <span class="tech-badge">Google Apps Script</span>
+                                    <span class="tech-badge">Node.js</span>
+                                    <span class="tech-badge">SQL / Bancos de Dados</span>
+                                    <span class="tech-badge">Jira / TopDesk / Trello</span>
+                                    <span class="tech-badge">Figma</span>
+                                    <span class="tech-badge">Eclipse</span>
+                                    <span class="tech-badge">Microsoft Teams</span>
+                                    <span class="tech-badge">Redes de Computadores</span>
+                                    <span class="tech-badge">Backup & Rotinas</span>
+                                    <span class="tech-badge">Documentação Técnica</span>
+                                    <span class="tech-badge">Atendimento ao Cliente</span>
+                                    <span class="tech-badge">Comunicação & Trabalho em Equipe</span>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+                <header class="text-center mb-12 animate-fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Habilidades & Tecnologias</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                        Conjunto de competências técnicas e ferramentas que utilizo no dia a dia profissional.
+                    </p>
+                </header>
+                
+                <!-- Skills Filter -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12 animate-slide-up">
+                    <button type="button" data-skill-filter="all" class="skill-filter active" aria-pressed="true">Todas</button>
+                    <button type="button" data-skill-filter="frontend" class="skill-filter" aria-pressed="false">Frontend</button>
+                    <button type="button" data-skill-filter="backend" class="skill-filter" aria-pressed="false">Backend</button>
+                    <button type="button" data-skill-filter="infra" class="skill-filter" aria-pressed="false">Infra & Suporte</button>
+                </div>
+                
+                <!-- Skills Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Skill Card 1 -->
+                    <article class="skill-card" data-skill-category="frontend">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">javascript</span>
+                        </div>
+                        <h3 class="skill-title">JavaScript</h3>
+                        <p class="skill-level">Intermediário</p>
+                        <p class="skill-description">Desenvolvimento de scripts, automações e funcionalidades dinâmicas.</p>
+                    </article>
+                    
+                    <!-- Skill Card 2 -->
+                    <article class="skill-card" data-skill-category="frontend">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">code</span>
+                        </div>
+                        <h3 class="skill-title">HTML5 & CSS3</h3>
+                        <p class="skill-level">Avançado</p>
+                        <p class="skill-description">Desenvolvimento de interfaces responsivas e acessíveis.</p>
+                    </article>
+                    
+                    <!-- Skill Card 3 -->
+                    <article class="skill-card" data-skill-category="infra">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">developer_mode_tv</span>
+                        </div>
+                        <h3 class="skill-title">TOTVS Fluig</h3>
+                        <p class="skill-level">Avançado</p>
+                        <p class="skill-description">Desenvolvimento e suporte em workflows, forms e integrações.</p>
+                    </article>
+                    
+                    <!-- Skill Card 4 -->
+                    <article class="skill-card" data-skill-category="infra">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">cloud</span>
+                        </div>
+                        <h3 class="skill-title">Google Workspace</h3>
+                        <p class="skill-level">Intermediário</p>
+                        <p class="skill-description">Administração de contas, domínios, backups e configurações.</p>
+                    </article>
+                    
+                    <!-- Skill Card 5 -->
+                    <article class="skill-card" data-skill-category="infra">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">computer</span>
+                        </div>
+                        <h3 class="skill-title">Suporte Técnico</h3>
+                        <p class="skill-level">Avançado</p>
+                        <p class="skill-description">Suporte N1, N2 e N3 - Hardware, redes e sistemas.</p>
+                    </article>
+                    
+                    <!-- Skill Card 6 -->
+                    <article class="skill-card" data-skill-category="backend">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">api</span>
+                        </div>
+                        <h3 class="skill-title">APIs & Node.js</h3>
+                        <p class="skill-level">Básico/Intermediário</p>
+                        <p class="skill-description">Desenvolvimento e consumo de APIs RESTful.</p>
+                    </article>
+
+                    <!-- Additional Skill Card: Git -->
+                    <article class="skill-card" data-skill-category="backend">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">terminal</span>
+                        </div>
+                        <h3 class="skill-title">Git / GitHub</h3>
+                        <p class="skill-level">Intermediário</p>
+                        <p class="skill-description">Controle de versão, branches, pull requests e colaboração em equipe.</p>
+                    </article>
+
+                    <!-- Additional Skill Card: Google Apps Script -->
+                    <article class="skill-card" data-skill-category="infra">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">script</span>
+                        </div>
+                        <h3 class="skill-title">Google Apps Script</h3>
+                        <p class="skill-level">Intermediário</p>
+                        <p class="skill-description">Automação de rotinas no Google Workspace, criação de scripts para Sheets/Forms/Drive.</p>
+                    </article>
+
+                    <!-- Additional Skill Card: SQL -->
+                    <article class="skill-card" data-skill-category="backend">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">storage</span>
+                        </div>
+                        <h3 class="skill-title">SQL / Bancos de Dados</h3>
+                        <p class="skill-level">Básico/Intermediário</p>
+                        <p class="skill-description">Consultas, manipulação de dados e integrações básicas com bancos relacionais.</p>
+                    </article>
+
+                    <!-- Additional Skill Card: Figma -->
+                    <article class="skill-card" data-skill-category="frontend">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">design_services</span>
+                        </div>
+                        <h3 class="skill-title">Figma</h3>
+                        <p class="skill-level">Básico</p>
+                        <p class="skill-description">Prototipagem e comunicação visual com designers para implementação front-end.</p>
+                    </article>
+
+                    <!-- Additional Skill Card: Jira / TopDesk -->
+                    <article class="skill-card" data-skill-category="infra">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">task</span>
+                        </div>
+                        <h3 class="skill-title">Jira / TopDesk / Trello</h3>
+                        <p class="skill-level">Intermediário</p>
+                        <p class="skill-description">Gestão de chamados, acompanhamento de sprints e organização de tarefas.</p>
+                    </article>
+
+                    <!-- Additional Skill Card: Redes de Computadores -->
+                    <article class="skill-card" data-skill-category="infra">
+                        <div class="skill-icon">
+                            <span class="material-symbols-outlined text-4xl" aria-hidden="true">router</span>
+                        </div>
+                        <h3 class="skill-title">Redes de Computadores</h3>
+                        <p class="skill-level">Básico/Intermediário</p>
+                        <p class="skill-description">Configuração básica de redes, DHCP, DNS, roteamento e resolução de problemas de conectividade.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
+            <div class="max-w-6xl mx-auto">
+                <header class="text-center mb-12 animate-fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Experiência Profissional</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                        Minha trajetória e conquistas no mercado de trabalho.
+                    </p>
+                </header>
+                
+                <!-- Experience Timeline -->
+                <div class="relative">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary to-secondary hidden md:block" aria-hidden="true"></div>
+                    
+                    <!-- Timeline Items -->
+                    <div class="space-y-12">
+                        <!-- SB Group -->
+                        <article class="experience-item md:flex-row" data-aos="fade-up">
+                            <div class="experience-date">nov 2023 – Atual</div>
+                            <div class="experience-content">
+                                <h3 class="experience-title">Analista de Suporte de TI</h3>
+                                <p class="experience-company">SB Group · Cascavel, PR · Presencial</p>
+                                <ul class="experience-description">
+                                    <li>Atuação no suporte técnico (N1/N2/N3) e implantação do sistema TOTVS Fluig, com resolução de chamados e acompanhamento de demandas.</li>
+                                    <li>Gerenciamento da plataforma Google Workspace: criação/remoção de contas, controle de senhas, backups e políticas de segurança.</li>
+                                    <li>Desenvolvimento e automações em Fluig (formulários, widgets, eventos) e scripts em Google Apps Script para automação de rotinas.</li>
+                                    <li>Uso diário de ferramentas de gestão e colaboração: Jira, Trello, Teams, Eclipse, Git/GitHub, Postman, Figma, e suporte com ChatGPT quando aplicável.</li>
+                                </ul>
+                                <div class="experience-tags">
+                                    <span class="tag">Fluig</span>
+                                    <span class="tag">Google Workspace</span>
+                                    <span class="tag">JavaScript</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- T-Health Sistemas -->
+                        <article class="experience-item md:flex-row-reverse" data-aos="fade-up">
+                            <div class="experience-date">fev 2024 – nov 2025</div>
+                            <div class="experience-content">
+                                <h3 class="experience-title">Analista de Desenvolvimento Fluig</h3>
+                                <p class="experience-company">T-Health Sistemas · Cascavel, PR · Remoto</p>
+                                <ul class="experience-description">
+                                    <li>Participação em projetos Fluig (parceria com Unimed FESP): desenvolvimento de automações, processos, formulários, widgets e eventos.</li>
+                                    <li>Atuação em suporte técnico N3, atendimento de incidentes, implementação de melhorias e elaboração de documentação técnica.</li>
+                                    <li>Ferramentas utilizadas: Jira, TopDesk, Azure, Git/GitHub, Teams, Eclipse e Postman.</li>
+                                </ul>
+                                <div class="experience-tags">
+                                    <span class="tag">Fluig</span>
+                                    <span class="tag">Suporte N3</span>
+                                    <span class="tag">Documentação</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- iSoft Sistemas -->
+                        <article class="experience-item md:flex-row" data-aos="fade-up">
+                            <div class="experience-date">out 2023 – nov 2023</div>
+                            <div class="experience-content">
+                                <h3 class="experience-title">Helpdesk (Estágio)</h3>
+                                <p class="experience-company">iSoft Sistemas · Cascavel, PR · Presencial</p>
+                                <ul class="experience-description">
+                                    <li>Suporte de primeiro nível a usuários, registro e acompanhamento de chamados;</li>
+                                    <li>Atendimento presencial em escritório e suporte remoto, com foco em informática corporativa básica.</li>
+                                </ul>
+                                <div class="experience-tags">
+                                    <span class="tag">Informática</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- JBI Serviços (DXC project) -->
+                        <article class="experience-item md:flex-row-reverse" data-aos="fade-up">
+                            <div class="experience-date">jul 2023 – ago 2023</div>
+                            <div class="experience-content">
+                                <h3 class="experience-title">Técnico de Apoio ao Usuário (Helpdesk)</h3>
+                                <p class="experience-company">JBI Serviços · Cascavel, PR · Presencial</p>
+                                <ul class="experience-description">
+                                    <li>Participação no projeto de refresh para cliente DXC: preparo e formatação de equipamentos, atualização de drivers e aplicação de imagem padrão.</li>
+                                    <li>Backup e migração de dados dos usuários, documentação de entrega e suporte na troca de equipamentos.</li>
+                                </ul>
+                                <div class="experience-tags">
+                                    <span class="tag">Helpdesk</span>
+                                    <span class="tag">Documentação</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- SEASO -->
+                        <article class="experience-item md:flex-row" data-aos="fade-up">
+                            <div class="experience-date">nov 2022 – mar 2023</div>
+                            <div class="experience-content">
+                                <h3 class="experience-title">Auxiliar de Informática (Estágio)</h3>
+                                <p class="experience-company">SEASO - Departamento de Assistência Social · Cascavel, PR · Híbrido</p>
+                                <ul class="experience-description">
+                                    <li>Gerenciamento de softwares e suporte técnico presencial/remoto.</li>
+                                    <li>Montagem e instalação de computadores, configuração e manutenção de redes e atendimento de chamados.</li>
+                                </ul>
+                                <div class="experience-tags">
+                                    <span class="tag">Suporte técnico</span>
+                                    <span class="tag">Redes</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Maffini Material de Construção -->
+                        <article class="experience-item md:flex-row-reverse" data-aos="fade-up">
+                            <div class="experience-date">abr 2022 – nov 2022</div>
+                            <div class="experience-content">
+                                <h3 class="experience-title">Vendedor Interno</h3>
+                                <p class="experience-company">Maffini Material de Construção · Cascavel, PR · Presencial</p>
+                                <ul class="experience-description">
+                                    <li>Atendimento ao cliente, vendas internas e apoio na gestão de contas a receber/pagar.</li>
+                                    <li>Participação em treinamentos e suporte às atividades de integração da equipe.</li>
+                                </ul>
+                                <div class="experience-tags">
+                                    <span class="tag">Vendas</span>
+                                    <span class="tag">Atendimento</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Lojas O Doidão -->
+                        <article class="experience-item md:flex-row" data-aos="fade-up">
+                            <div class="experience-date">jun 2021 – abr 2022</div>
+                            <div class="experience-content">
+                                <h3 class="experience-title">Vendedor</h3>
+                                <p class="experience-company">Lojas O Doidão · Cascavel, PR · Presencial</p>
+                                <ul class="experience-description">
+                                    <li>Contagem de estoque, reposição e organização da loja; vendas presenciais e online.</li>
+                                    <li>Suporte na exposição de produtos e ações para melhorar a experiência do cliente.</li>
+                                </ul>
+                                <div class="experience-tags">
+                                    <span class="tag">Vendas a varejo</span>
+                                    <span class="tag">Atendimento</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+                <header class="text-center mb-12 animate-fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Projetos em Destaque</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                        Alguns projetos dos quais me orgulho. Use os filtros para explorar.
+                    </p>
+                </header>
+                
+                <!-- Projects Filter -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12 animate-slide-up">
+                    <button type="button" data-project-filter="all" class="project-filter active" aria-pressed="true">Todos</button>
+                    <button type="button" data-project-filter="fluig" class="project-filter" aria-pressed="false">Fluig</button>
+                    <button type="button" data-project-filter="workspace" class="project-filter" aria-pressed="false">Google Workspace</button>
+                    <button type="button" data-project-filter="infra" class="project-filter" aria-pressed="false">Infra / Suporte</button>
+                </div>
+                
+                <!-- Projects Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Project 1 -->
+                    <article class="project-card" data-project-category="fluig" data-aos="zoom-in">
+                        <div class="project-image" role="img" aria-label="Workflows e Forms no Fluig">
+                            <img src="https://images.pexels.com/photos/2706379/pexels-photo-2706379.jpeg?auto=compress&cs=tinysrgb&w=1200" 
+                                 alt="Workflows e Forms desenvolvidos no TOTVS Fluig"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Workflows e Forms (Fluig)</h3>
+                            <p class="project-description">
+                                Desenvolvimento e suporte em fluxos de aprovação, cadastros e integrações com Protheus/RM.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Fluig</span>
+                                <span class="tag">JavaScript</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Project 2 -->
+                    <article class="project-card" data-project-category="workspace" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="project-image" role="img" aria-label="Dashboard de Administração Google Workspace">
+                            <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200" 
+                                 alt="Dashboard de administração do Google Workspace"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Administração Google Workspace</h3>
+                            <p class="project-description">
+                                Organização de contas, grupos, domínios, permissões e rotinas de backup para ambiente corporativo.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Google Workspace</span>
+                                <span class="tag">Suporte</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Project 3 -->
+                    <article class="project-card" data-project-category="infra" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="project-image" role="img" aria-label="Atualização de Hardware e Suporte Técnico">
+                            <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200" 
+                                 alt="Atualização de hardware e suporte técnico em ambiente corporativo"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Atualização de Hardware e Suporte</h3>
+                            <p class="project-description">
+                                Projetos de troca de parque tecnológico, formatação, backup e entrega de novos equipamentos.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Infra</span>
+                                <span class="tag">Helpdesk</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 to-secondary/5 dark:from-primary/10 dark:to-secondary/10">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- Contact Info -->
+                    <div class="animate-fade-in">
+                        <header class="mb-8">
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Fale Comigo</h2>
+                            <p class="text-lg text-gray-600 dark:text-gray-400">
+                                Tem um projeto em mente ou quer se conectar? Estou aberto a novas oportunidades.
+                            </p>
+                        </header>
+                        
+                        <!-- Contact Details -->
+                        <div class="space-y-6">
+                            <div class="contact-item">
+                                <div class="contact-icon" aria-hidden="true">
+                                    <span class="material-symbols-outlined">mail</span>
+                                </div>
+                                <div>
+                                    <h3 class="contact-title">E-mail</h3>
+                                    <p id="contact-email" class="contact-value">victorhugocorreiamelo@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon" aria-hidden="true">
+                                    <span class="material-symbols-outlined">phone</span>
+                                </div>
+                                <div>
+                                    <h3 class="contact-title">Telefone</h3>
+                                    <p class="contact-value">(45) 98826-3231</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon" aria-hidden="true">
+                                    <span class="material-symbols-outlined">location_on</span>
+                                </div>
+                                <div>
+                                    <h3 class="contact-title">Localização</h3>
+                                    <p class="contact-value">Cascavel, Paraná, Brasil</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Email Copy Button -->
+                        <div class="mt-8">
+                            <button type="button" id="copy-email-btn" class="btn-secondary w-full" aria-label="Copiar e-mail para área de transferência">
+                                <span class="material-symbols-outlined mr-2" aria-hidden="true">content_copy</span>
+                                <span class="copy-label">Copiar E-mail</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Social Links -->
+                        <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Conecte-se</h3>
+                            <div class="flex gap-4">
+                                <a href="https://www.linkedin.com/in/victor-hugo-correia-de-melo" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   class="social-link"
+                                   aria-label="LinkedIn - Perfil profissional">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                    </svg>
+                                </a>
+                                <a href="https://github.com/seu-usuario" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   class="social-link"
+                                   aria-label="GitHub - Repositórios de código">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div class="animate-slide-up">
+                        <form id="contact-form" class="space-y-6 bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-xl">
+                            <div>
+                                <label for="name" class="form-label">Nome</label>
+                                <input type="text" id="name" name="name" required class="form-input" placeholder="Seu nome completo">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" id="email" name="email" required class="form-input" placeholder="seu@email.com">
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="form-label">Assunto</label>
+                                <input type="text" id="subject" name="subject" class="form-input" placeholder="Sobre o que gostaria de conversar?">
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="form-label">Mensagem</label>
+                                <textarea id="message" name="message" rows="5" required class="form-input" placeholder="Descreva sua proposta, dúvida ou interesse..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary w-full">
+                                <span class="material-symbols-outlined mr-2" aria-hidden="true">send</span>
+                                Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 sm:px-6 lg:px-8 bg-gray-900 text-gray-300">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <p class="text-lg font-semibold text-white mb-2">Victor Hugo Correia de Melo</p>
+                    <p class="text-sm">VHCM Tech Solutions</p>
+                </div>
+                
+                <div class="text-center">
+                    <p id="copyright" class="text-sm">
+                        © <span id="current-year"></span> Todos os direitos reservados.
+                    </p>
+                    <p class="text-xs mt-2 text-gray-400">Desenvolvido com paixão por tecnologia</p>
+                </div>
+                
+                <a href="#home" class="btn-primary" aria-label="Voltar ao topo">
+                    <span class="material-symbols-outlined" aria-hidden="true">arrow_upward</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js" defer></script>
+</body>
 </html>
