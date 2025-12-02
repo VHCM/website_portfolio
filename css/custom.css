@@ -239,6 +239,18 @@ body.dark {
     box-shadow: var(--shadow-lg);
 }
 
+/* Small button modifier: reduz padding e tamanho de fonte para botões compactos */
+.btn-sm {
+    padding: 0.25rem 0.6rem !important;
+    font-size: 0.875rem !important;
+    line-height: 1 !important;
+    border-radius: 0.5rem !important;
+}
+
+.btn-sm .material-symbols-outlined {
+    font-size: 1rem !important;
+}
+
 /* Badges de Tecnologia */
 .tech-badge {
     display: inline-block;
