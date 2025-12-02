@@ -522,7 +522,7 @@ body.dark {
     border-radius: 0.5rem;
     font-weight: 600;
     font-size: 0.875rem;
-    text-align: center !important;
+    text-align: center !;
 }
 
 @media (min-width: 768px) {
@@ -791,10 +791,7 @@ button:focus,
 }
 
 /* ===== MOBILE MENU HELPERS ===== */
-/* Estado visível do menu móvel (classe `open` adicionada pelo JS) */
 #mobile-menu {
-    /* Inicia não interativo e oculto (as utilidades Tailwind já setam transform/opacidade)
-       mas garantir pointer-events para impedir cliques enquanto fechado */
     pointer-events: none;
 }
 
@@ -805,7 +802,6 @@ button:focus,
     pointer-events: auto !important;
 }
 
-/* Quando o menu estiver aberto, travar rolagem do body (usado pelo JS) */
 body.menu-open {
     overflow: hidden;
     touch-action: none;
