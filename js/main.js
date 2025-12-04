@@ -33,6 +33,12 @@ const CONFIG = {
         hidden: 'hidden',
         toast: 'toast',
         hide: 'hide'
+    },
+    // Configuração para EmailJS (deixe vazio se não for usar)
+    emailjs: {
+        userId: 'VETk-VfIJa6ebMEM7', // ex: 'user_xxxxxx' -> Substitua após criar conta no EmailJS
+        serviceId: 'service_mxhioiw', // ex: 'service_xxx'
+        templateId: 'template_up6tauu' // ex: 'template_xxx'
     }
 };
 
@@ -435,28 +441,77 @@ class ContactManager {
     }
 
     setupContactForm() {
-        this.contactForm.addEventListener('submit', (e) => {
+        const submitButton = this.contactForm.querySelector('button[type="submit"]');
+
+        this.contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             // Validação básica
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const subject = document.getElementById('subject').value.trim() || 'Contato pelo portfólio';
             const message = document.getElementById('message').value.trim();
-            
+
             if (!name || !email || !message) {
                 ToastManager.show('Por favor, preencha todos os campos obrigatórios.', 'error');
                 return;
             }
-            
+
             // Validar email
             if (!this.isValidEmail(email)) {
                 ToastManager.show('Por favor, insira um e-mail válido.', 'error');
                 return;
             }
-            
-            // Enviar via mailto
+
+            // Helper para estado do botão
+            const setLoading = (isLoading) => {
+                if (!submitButton) return;
+                submitButton.disabled = isLoading;
+                submitButton.setAttribute('aria-busy', String(isLoading));
+                const icon = submitButton.querySelector('.material-symbols-outlined');
+                if (isLoading) {
+                    if (icon) icon.textContent = 'autorenew';
+                    submitButton.classList.add('opacity-80', 'cursor-wait');
+                } else {
+                    if (icon) icon.textContent = 'send';
+                    submitButton.classList.remove('opacity-80', 'cursor-wait');
+                }
+            };
+
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_email: this.emailElement ? this.emailElement.textContent.trim() : ''
+            };
+
+            const emailjsCfg = CONFIG.emailjs || {};
+            if (emailjsCfg.userId && emailjsCfg.serviceId && emailjsCfg.templateId && window.emailjs) {
+                try {
+                    setLoading(true);
+                    window.emailjs.init(emailjsCfg.userId);
+                    const resp = await window.emailjs.send(emailjsCfg.serviceId, emailjsCfg.templateId, templateParams);
+                    console.log('EmailJS send response:', resp);
+                    ToastManager.show('Mensagem enviada com sucesso!');
+                    this.contactForm.reset();
+                    setLoading(false);
+                    return;
+                } catch (err) {
+                    console.error('EmailJS erro:', err);
+                    ToastManager.show('Falha ao enviar a mensagem por EmailJS. Tentando fallback...', 'error');
+                    setLoading(false);
+                }
+            } else {
+                if (!emailjsCfg.userId || !emailjsCfg.serviceId || !emailjsCfg.templateId) {
+                    ToastManager.show('EmailJS não configurado. Abrindo cliente de e-mail...', 'warning');
+                }
+            }
+
+            // Fallback: abrir cliente de e-mail (mailto)
             this.sendMailto(name, email, subject, message);
+            this.contactForm.reset();
+            setLoading(false);
         });
     }
 
