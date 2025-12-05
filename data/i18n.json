@@ -1,0 +1,488 @@
+{
+    "pt": {
+        "nav": {
+            "home": "Home",
+            "about": "Sobre",
+            "skills": "Habilidades",
+            "experience": "Experiência",
+            "projects": "Projetos",
+            "contact": "Contato",
+            "skipToMain": "Pular para conteúdo principal",
+            "menuToggle": "Abrir menu de navegação",
+            "backToTop": "Voltar ao topo"
+        },
+        "hero": {
+            "name": "Victor Hugo",
+            "lastName": "Correia de Melo",
+            "title": "Analista de Suporte Técnico · Desenvolvedor Web · TOTVS Fluig · Automação de Processos",
+            "description": "Especialista em suporte que transforma necessidades em projetos: implemento automações eficientes, usando ferramentas convencionais ou IA conforme a demanda.",
+            "downloadCv": "Baixar CV",
+            "viewProjects": "Ver Projetos",
+            "contact": "Contato"
+        },
+        "about": {
+            "heading": "Sobre Mim",
+            "para1": "Profissional de TI com foco em <strong>suporte técnico</strong> e <strong>automação de processos empresariais</strong>. Tenho experiência no ecossistema <strong>TOTVS Fluig</strong> e <strong>Google Workspace</strong>, atuando em manutenção de hardware e software, gerenciamento de contas e redes, além de desenvolvimento em <strong>JavaScript, HTML e CSS</strong>.",
+            "para2": "Já participei de projetos que <strong>reduziram o volume de chamados</strong> e criaram fluxos automatizados para processos internos. Gosto de unir suporte ao usuário, melhoria contínua e documentação bem feita.",
+            "para3": "Sou graduando em <strong>Tecnologia em Análise e Desenvolvimento de Sistemas (TADS)</strong> e busco constantemente aprender e aplicar novas soluções que façam diferença no dia a dia das empresas.",
+            "mainTechs": "Tecnologias Principais",
+            "moreTechs": "Ver mais competências"
+        },
+        "skills": {
+            "heading": "Habilidades & Tecnologias",
+            "description": "Conjunto de competências técnicas e ferramentas que utilizo no dia a dia profissional.",
+            "filters": {
+                "all": "Todas",
+                "frontend": "Frontend",
+                "backend": "Backend",
+                "infra": "Infra & Suporte"
+            }
+        },
+        "skills_cards": {
+            "javascript": "Desenvolvimento de scripts, automações e funcionalidades dinâmicas.",
+            "html_css": "Desenvolvimento de interfaces responsivas e acessíveis.",
+            "fluig": "Desenvolvimento e suporte em workflows, forms e integrações.",
+            "apis": "Desenvolvimento e consumo de APIs RESTful.",
+            "git": "Controle de versão, branches, pull requests e colaboração em equipe.",
+            "google_apps": "Automação de rotinas no Google Workspace, criação de scripts para Sheets/Forms/Drive.",
+            "sql": "Consultas, manipulação de dados e integrações básicas com bancos relacionais.",
+            "figma": "Prototipagem e comunicação visual com designers para implementação front-end.",
+            "jira": "Gestão de chamados, acompanhamento de sprints e organização de tarefas.",
+            "networks": "Configuração básica de redes, DHCP, DNS, roteamento e resolução de problemas de conectividade."
+        },
+        "skills_details": {
+            "titles": {
+                "javascript": "JavaScript",
+                "html_css": "HTML5 & CSS3",
+                "fluig": "TOTVS Fluig",
+                "fluig_identity": "Fluig Identity",
+                "google_workspace": "Google Workspace",
+                "support": "Suporte Técnico",
+                "apis_nodejs": "APIs & Node.js",
+                "git_github": "Git / GitHub",
+                "google_apps_script": "Google Apps Script",
+                "sql_databases": "SQL / Bancos de Dados",
+                "figma": "Figma",
+                "jira_tools": "Jira / TopDesk / Trello",
+                "networks": "Redes de Computadores"
+            },
+            "levels": {
+                "basic": "Básico",
+                "intermediate": "Intermediário",
+                "advanced": "Avançado",
+                "basic_intermediate": "Básico/Intermediário"
+            }
+        },
+        "tags": {
+            "experience": {
+                "fluig": "Fluig",
+                "google_workspace": "Google Workspace",
+                "javascript": "JavaScript",
+                "support_n3": "Suporte N3",
+                "documentation": "Documentação",
+                "it": "Informática",
+                "helpdesk": "Helpdesk",
+                "technical_support": "Suporte técnico",
+                "networks": "Redes",
+                "sales": "Vendas",
+                "customer_service": "Atendimento",
+                "retail_sales": "Vendas a varejo"
+            },
+            "projects": {
+                "totvs": "TOTVS",
+                "fluig": "Fluig",
+                "javascript": "JavaScript",
+                "html5": "HTML5",
+                "css3": "CSS3",
+                "sql": "SQL",
+                "protheus": "Protheus",
+                "automation": "Automação",
+                "google_workspace": "Google Workspace",
+                "google_automations": "Automações do Google",
+                "google_app_script": "Google App Script",
+                "support": "Suporte",
+                "administration": "Administração",
+                "infra": "Infra",
+                "helpdesk": "Helpdesk",
+                "maintenance": "Manutenções",
+                "electronics": "Eletrônica",
+                "networks": "Redes",
+                "web_development": "Desenvolvimento Web",
+                "figma": "Figma",
+                "emailjs": "EmailJS",
+                "support_n2_n3": "Suporte N2/N3",
+                "support_n3": "Suporte N3",
+                "css": "CSS"
+            }
+        },
+        "experience": {
+            "heading": "Experiência Profissional",
+            "description": "Minha trajetória e conquistas no mercado de trabalho.",
+            "items": {
+                "sb_group": {
+                    "date": "nov 2023 – Atual",
+                    "title": "Analista de Suporte de TI",
+                    "company": "SB Group · Cascavel, PR · Presencial",
+                    "bullet1": "Atuação no suporte técnico (N1/N2/N3) e implantação do sistema TOTVS Fluig, com resolução de chamados e acompanhamento de demandas.",
+                    "bullet2": "Gerenciamento da plataforma Google Workspace: criação/remoção de contas, controle de senhas, backups e políticas de segurança.",
+                    "bullet3": "Desenvolvimento e automações em Fluig (formulários, widgets, eventos) e scripts em Google Apps Script para automação de rotinas.",
+                    "bullet4": "Uso diário de ferramentas de gestão e colaboração: Jira, Trello, Teams, Eclipse, Git/GitHub, Postman, Figma, e suporte com ChatGPT quando aplicável."
+                },
+                "thealth": {
+                    "date": "fev 2024 – nov 2025",
+                    "title": "Analista de Desenvolvimento Fluig",
+                    "company": "T-Health Sistemas · Cascavel, PR · Remoto",
+                    "bullet1": "Participação em projetos Fluig (parceria com Unimed FESP): desenvolvimento de automações, processos, formulários, widgets e eventos.",
+                    "bullet2": "Atuação em suporte técnico N3, atendimento de incidentes, implementação de melhorias e elaboração de documentação técnica.",
+                    "bullet3": "Ferramentas utilizadas: Jira, TopDesk, Azure, Git/GitHub, Teams, Eclipse e Postman."
+                },
+                "isoft": {
+                    "date": "out 2023 – nov 2023",
+                    "title": "Helpdesk (Estágio)",
+                    "company": "iSoft Sistemas · Cascavel, PR · Presencial",
+                    "bullet1": "Suporte de primeiro nível a usuários, registro e acompanhamento de chamados;",
+                    "bullet2": "Atendimento presencial em escritório e suporte remoto, com foco em informática corporativa básica."
+                },
+                "jbi": {
+                    "date": "jul 2023 – ago 2023",
+                    "title": "Técnico de Apoio ao Usuário (Helpdesk)",
+                    "company": "JBI Serviços · Cascavel, PR · Presencial",
+                    "bullet1": "Participação no projeto de refresh para cliente DXC: preparo e formatação de equipamentos, atualização de drivers e aplicação de imagem padrão.",
+                    "bullet2": "Backup e migração de dados dos usuários, documentação de entrega e suporte na troca de equipamentos."
+                },
+                "seaso": {
+                    "date": "nov 2022 – mar 2023",
+                    "title": "Auxiliar de Informática (Estágio)",
+                    "company": "SEASO - Departamento de Assistência Social · Cascavel, PR · Híbrido",
+                    "bullet1": "Gerenciamento de softwares e suporte técnico presencial/remoto.",
+                    "bullet2": "Montagem e instalação de computadores, configuração e manutenção de redes e atendimento de chamados."
+                },
+                "maffini": {
+                    "date": "abr 2022 – nov 2022",
+                    "title": "Vendedor Interno",
+                    "company": "Maffini Material de Construção · Cascavel, PR · Presencial",
+                    "bullet1": "Atendimento ao cliente, vendas internas e apoio na gestão de contas a receber/pagar.",
+                    "bullet2": "Participação em treinamentos e suporte às atividades de integração da equipe."
+                },
+                "lojas": {
+                    "date": "jun 2021 – abr 2022",
+                    "title": "Vendedor",
+                    "company": "Lojas O Doidão · Cascavel, PR · Presencial",
+                    "bullet1": "Contagem de estoque, reposição e organização da loja; vendas presenciais e online.",
+                    "bullet2": "Suporte na exposição de produtos e ações para melhorar a experiência do cliente."
+                }
+            }
+        },
+        "projects": {
+            "heading": "Projetos em Destaque",
+            "description": "Alguns projetos dos quais me orgulho. Use os filtros para explorar.",
+            "filters": {
+                "all": "Todos",
+                "fluig": "Fluig",
+                "workspace": "Google Workspace",
+                "infra": "Infra / Suporte",
+                "dev": "Desenvolvimento"
+            },
+            "visitSite": "Visitar Site",
+            "viewCode": "Código",
+            "items": {
+                "workflows_fluig": {
+                    "title": "Workflows e Forms (Fluig)",
+                    "description": "Desenvolvimento e suporte em fluxos de aprovação, cadastros e integrações com Protheus/RM."
+                },
+                "admin_workspace": {
+                    "title": "Administração Google Workspace",
+                    "description": "Organização de contas, grupos, domínios, permissões e rotinas de backup para ambiente corporativo."
+                },
+                "hardware_support": {
+                    "title": "Atualização de Hardware e Suporte",
+                    "description": "Projetos de troca de parque tecnológico, formatação, backup e entrega de novos equipamentos."
+                },
+                "longuevie": {
+                    "title": "Longuevie - Website Comercial de Fisioterapia",
+                    "description": "Website institucional para clínica de fisioterapia, com apresentação de serviços, agendamento e arquitetura responsiva otimizada para conversão."
+                },
+                "compras_ciagropa": {
+                    "title": "Processo de Compras (Fluig)",
+                    "description": "Projeto de automação do processo de solicitação de compras na empresa Ciagropa, com fluxos de aprovação e integrações."
+                },
+                "suporte_unimed": {
+                    "title": "Suporte Processo de Compras (Fluig)",
+                    "description": "Suporte e manutenção corretiva em fluxos de aprovação e integrações com Protheus/RM para Unimed-FESP."
+                },
+                "suporte_sbgroup": {
+                    "title": "Suporte e Desenvolvimento Processos (Fluig)",
+                    "description": "Gestão de usuários, suporte helpdesk e desenvolvimento de fluxos, automações e widgets na plataforma Fluig."
+                }
+            }
+        },
+        "contact": {
+            "heading": "Fale Comigo",
+            "description": "Tem um projeto em mente ou quer se conectar? Estou aberto a novas oportunidades.",
+            "email": "E-mail",
+            "phone": "Telefone",
+            "location": "Localização",
+            "copyEmail": "Copiar E-mail",
+            "connect": "Conecte-se",
+            "form": {
+                "name": "Nome",
+                "namePlaceholder": "Seu nome completo",
+                "email": "E-mail",
+                "emailPlaceholder": "seu@email.com",
+                "subject": "Assunto",
+                "subjectPlaceholder": "Sobre o que gostaria de conversar?",
+                "message": "Mensagem",
+                "messagePlaceholder": "Descreva sua proposta, dúvida ou interesse...",
+                "send": "Enviar Mensagem"
+            }
+        },
+        "footer": {
+            "allRights": "Todos os direitos reservados.",
+            "passion": "Desenvolvido com paixão por tecnologia"
+        },
+        "language": "Português"
+    },
+    "en": {
+        "nav": {
+            "home": "Home",
+            "about": "About",
+            "skills": "Skills",
+            "experience": "Experience",
+            "projects": "Projects",
+            "contact": "Contact",
+            "skipToMain": "Skip to main content",
+            "menuToggle": "Toggle navigation menu",
+            "backToTop": "Back to top"
+        },
+        "hero": {
+            "name": "Victor Hugo",
+            "lastName": "Correia de Melo",
+            "title": "Technical Support Analyst · Web Developer · TOTVS Fluig · Process Automation",
+            "description": "Support specialist who transforms needs into projects: I implement efficient automations, using conventional tools or AI as needed.",
+            "downloadCv": "Download CV",
+            "viewProjects": "View Projects",
+            "contact": "Contact"
+        },
+        "about": {
+            "heading": "About Me",
+            "para1": "IT professional focused on <strong>technical support</strong> and <strong>business process automation</strong>. I have experience in the <strong>TOTVS Fluig</strong> and <strong>Google Workspace</strong> ecosystem, working on hardware and software maintenance, account and network management, as well as development in <strong>JavaScript, HTML and CSS</strong>.",
+            "para2": "I have participated in projects that <strong>reduced the volume of support tickets</strong> and created automated workflows for internal processes. I enjoy combining user support, continuous improvement, and good documentation.",
+            "para3": "I am a graduate student in <strong>Technology in Systems Analysis and Development (TADS)</strong> and constantly seek to learn and apply new solutions that make a difference in companies' daily operations.",
+            "mainTechs": "Main Technologies",
+            "moreTechs": "See more skills"
+        },
+        "skills": {
+            "heading": "Skills & Technologies",
+            "description": "Set of technical skills and tools I use in my daily professional work.",
+            "filters": {
+                "all": "All",
+                "frontend": "Frontend",
+                "backend": "Backend",
+                "infra": "Infra & Support"
+            }
+        },
+        "skills_cards": {
+            "javascript": "Development of scripts, automations and dynamic features.",
+            "html_css": "Building responsive and accessible interfaces.",
+            "fluig": "Development and support on workflows, forms and integrations.",
+            "apis": "Developing and consuming RESTful APIs.",
+            "git": "Version control, branching, pull requests and team collaboration.",
+            "google_apps": "Automating routines in Google Workspace, creating scripts for Sheets/Forms/Drive.",
+            "sql": "Queries, data manipulation and basic integrations with relational databases.",
+            "figma": "Prototyping and visual communication with designers for front-end implementation.",
+            "jira": "Ticket management, sprint tracking and task organization.",
+            "networks": "Basic network setup, DHCP, DNS, routing and troubleshooting connectivity issues."
+        },
+        "skills_details": {
+            "titles": {
+                "javascript": "JavaScript",
+                "html_css": "HTML5 & CSS3",
+                "fluig": "TOTVS Fluig",
+                "fluig_identity": "Fluig Identity",
+                "google_workspace": "Google Workspace",
+                "support": "Technical Support",
+                "apis_nodejs": "APIs & Node.js",
+                "git_github": "Git / GitHub",
+                "google_apps_script": "Google Apps Script",
+                "sql_databases": "SQL / Databases",
+                "figma": "Figma",
+                "jira_tools": "Jira / TopDesk / Trello",
+                "networks": "Computer Networks"
+            },
+            "levels": {
+                "basic": "Basic",
+                "intermediate": "Intermediate",
+                "advanced": "Advanced",
+                "basic_intermediate": "Basic/Intermediate"
+            }
+        },
+        "tags": {
+            "experience": {
+                "fluig": "Fluig",
+                "google_workspace": "Google Workspace",
+                "javascript": "JavaScript",
+                "support_n3": "L3 Support",
+                "documentation": "Documentation",
+                "it": "IT",
+                "helpdesk": "Helpdesk",
+                "technical_support": "Technical Support",
+                "networks": "Networks",
+                "sales": "Sales",
+                "customer_service": "Customer Service",
+                "retail_sales": "Retail Sales"
+            },
+            "projects": {
+                "totvs": "TOTVS",
+                "fluig": "Fluig",
+                "javascript": "JavaScript",
+                "html5": "HTML5",
+                "css3": "CSS3",
+                "sql": "SQL",
+                "protheus": "Protheus",
+                "automation": "Automation",
+                "google_workspace": "Google Workspace",
+                "google_automations": "Google Automations",
+                "google_app_script": "Google App Script",
+                "support": "Support",
+                "administration": "Administration",
+                "infra": "Infra",
+                "helpdesk": "Helpdesk",
+                "maintenance": "Maintenance",
+                "electronics": "Electronics",
+                "networks": "Networks",
+                "web_development": "Web Development",
+                "figma": "Figma",
+                "emailjs": "EmailJS",
+                "support_n2_n3": "L2/L3 Support",
+                "support_n3": "L3 Support",
+                "css": "CSS"
+            }
+        },
+        "experience": {
+            "heading": "Professional Experience",
+            "description": "My trajectory and achievements in the job market.",
+            "items": {
+                "sb_group": {
+                    "date": "Nov 2023 – Present",
+                    "title": "IT Support Analyst",
+                    "company": "SB Group · Cascavel, PR · On-site",
+                    "bullet1": "Worked on technical support (L1/L2/L3) and deployment of the TOTVS Fluig system, resolving tickets and following up on requests.",
+                    "bullet2": "Managed Google Workspace: account lifecycle, password control, backups and security policies.",
+                    "bullet3": "Development and automations in Fluig (forms, widgets, events) and Google Apps Script for routine automation.",
+                    "bullet4": "Daily use of collaboration tools: Jira, Trello, Teams, Eclipse, Git/GitHub, Postman, Figma, and ChatGPT assistance when applicable."
+                },
+                "thealth": {
+                    "date": "Feb 2024 – Nov 2025",
+                    "title": "Fluig Development Analyst",
+                    "company": "T-Health Sistemas · Cascavel, PR · Remote",
+                    "bullet1": "Participation in Fluig projects (partnership with Unimed FESP): development of automations, processes, forms, widgets, and events.",
+                    "bullet2": "Worked on L3 support, incident handling, implementing improvements and creating technical documentation.",
+                    "bullet3": "Tools used: Jira, TopDesk, Azure, Git/GitHub, Teams, Eclipse and Postman."
+                },
+                "isoft": {
+                    "date": "Oct 2023 – Nov 2023",
+                    "title": "Helpdesk (Internship)",
+                    "company": "iSoft Sistemas · Cascavel, PR · On-site",
+                    "bullet1": "Provided first-level user support, ticket logging and follow-up;",
+                    "bullet2": "On-site and remote support, focusing on basic corporate IT."
+                },
+                "jbi": {
+                    "date": "Jul 2023 – Aug 2023",
+                    "title": "User Support Technician (Helpdesk)",
+                    "company": "JBI Serviços · Cascavel, PR · On-site",
+                    "bullet1": "Participated in a refresh project for a DXC client: preparing and imaging equipment, driver updates and applying standard images.",
+                    "bullet2": "Backups and user data migration, delivery documentation and support during equipment replacements."
+                },
+                "seaso": {
+                    "date": "Nov 2022 – Mar 2023",
+                    "title": "IT Assistant (Internship)",
+                    "company": "SEASO - Social Assistance Department · Cascavel, PR · Hybrid",
+                    "bullet1": "Managed software and provided on-site/remote technical support.",
+                    "bullet2": "Assembled and installed computers, configured and maintained networks and handled support tickets."
+                },
+                "maffini": {
+                    "date": "Apr 2022 – Nov 2022",
+                    "title": "Internal Salesperson",
+                    "company": "Maffini Building Materials · Cascavel, PR · On-site",
+                    "bullet1": "Customer service, internal sales and support for accounts receivable/payable management.",
+                    "bullet2": "Participated in trainings and supported team onboarding activities."
+                },
+                "lojas": {
+                    "date": "Jun 2021 – Apr 2022",
+                    "title": "Salesperson",
+                    "company": "Lojas O Doidão · Cascavel, PR · On-site",
+                    "bullet1": "Stock counting, replenishment and store organization; in-store and online sales.",
+                    "bullet2": "Supported product displays and initiatives to improve customer experience."
+                }
+            }
+        },
+        "projects": {
+            "heading": "Featured Projects",
+            "description": "Some projects I'm proud of. Use the filters to explore.",
+            "filters": {
+                "all": "All",
+                "fluig": "Fluig",
+                "workspace": "Google Workspace",
+                "infra": "Infra / Support",
+                "dev": "Development"
+            },
+            "visitSite": "Visit Site",
+            "viewCode": "Code",
+            "items": {
+                "workflows_fluig": {
+                    "title": "Workflows & Forms (Fluig)",
+                    "description": "Development and support of approval flows, registrations and integrations with Protheus/RM."
+                },
+                "admin_workspace": {
+                    "title": "Google Workspace Administration",
+                    "description": "Organization of accounts, groups, domains, permissions and backup routines for corporate environments."
+                },
+                "hardware_support": {
+                    "title": "Hardware Upgrade & Support",
+                    "description": "IT refresh projects: imaging, backups, hardware provisioning and deployment."
+                },
+                "longuevie": {
+                    "title": "Longuevie - Physiotherapy Commercial Website",
+                    "description": "Institutional website for a physiotherapy clinic, showcasing services, booking and conversion-focused responsive design."
+                },
+                "compras_ciagropa": {
+                    "title": "Purchasing Process (Fluig)",
+                    "description": "Automation project for Ciagropa's purchasing request process, with approval flows and system integrations."
+                },
+                "suporte_unimed": {
+                    "title": "Purchasing Support (Fluig)",
+                    "description": "Support and corrective maintenance of approval flows and integrations with Protheus/RM for Unimed-FESP."
+                },
+                "suporte_sbgroup": {
+                    "title": "Support & Process Development (Fluig)",
+                    "description": "User management, helpdesk support and development of flows, automations and widgets on the Fluig platform."
+                }
+            }
+        },
+        "contact": {
+            "heading": "Get In Touch",
+            "description": "Have a project in mind or want to connect? I'm open to new opportunities.",
+            "email": "Email",
+            "phone": "Phone",
+            "location": "Location",
+            "copyEmail": "Copy Email",
+            "connect": "Connect",
+            "form": {
+                "name": "Name",
+                "namePlaceholder": "Your full name",
+                "email": "Email",
+                "emailPlaceholder": "your@email.com",
+                "subject": "Subject",
+                "subjectPlaceholder": "What would you like to talk about?",
+                "message": "Message",
+                "messagePlaceholder": "Describe your proposal, question or interest...",
+                "send": "Send Message"
+            }
+        },
+        "footer": {
+            "allRights": "All rights reserved.",
+            "passion": "Built with passion for technology"
+        },
+        "language": "English"
+    }
+}
