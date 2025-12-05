@@ -232,10 +232,24 @@ class FilterManager {
 
         // Filtrar itens
         this.filterItems.forEach(item => {
-            const itemFilter = item.getAttribute(this.itemAttribute);
-            
+            var itemFilter = item.getAttribute(this.itemAttribute) || '';
+
+            // Permitir múltiplas categorias separadas por vírgula (ex: "dev,fluig")
+            var categories = itemFilter.split(',').map(function(s) { return s.trim().toLowerCase(); }).filter(Boolean);
+            var target = (filter || '').toLowerCase();
+
+            var matches = false;
+            if (target === 'all') {
+                matches = true;
+            } else if (categories.length === 0) {
+                // sem categoria explicitada — tratar como não correspondente
+                matches = false;
+            } else {
+                matches = categories.indexOf(target) !== -1;
+            }
+
             // Adicionar/remover classe hidden ao invés de manipular display diretamente
-            if (filter === 'all' || itemFilter === filter) {
+            if (matches) {
                 item.classList.remove('hidden');
                 item.style.display = ''; // Reset para display padrão
                 item.setAttribute('aria-hidden', 'false');
